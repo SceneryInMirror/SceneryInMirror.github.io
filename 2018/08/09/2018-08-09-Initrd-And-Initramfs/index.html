@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Learning,Computer," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Learning about Initrd and Initramfs, which play important roles in switching on the computer and loading the operating system.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Initrd and Initramfs">
+<meta property="og:url" content="https://sceneryinmirror.github.io/2018/08/09/2018-08-09-Initrd-And-Initramfs/index.html">
+<meta property="og:site_name" content="Kaixin&#39;s Kingdom">
+<meta property="og:description" content="Learning about Initrd and Initramfs, which play important roles in switching on the computer and loading the operating system.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-08-09T07:00:00.000Z">
+<meta property="article:modified_time" content="2020-01-09T00:45:38.589Z">
+<meta property="article:author" content="Kaixin Yang (Cayson)">
+<meta property="article:tag" content="Learning">
+<meta property="article:tag" content="Computer">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sceneryinmirror.github.io/2018/08/09/2018-08-09-Initrd-And-Initramfs/"/>
+
+
+
+
+
+  <title>Initrd and Initramfs | Kaixin's Kingdom</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kaixin's Kingdom</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个处女座叨叨叨叨的小世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sceneryinmirror.github.io/2018/08/09/2018-08-09-Initrd-And-Initramfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kaixin Yang (Cayson)">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kaixin's Kingdom">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Initrd and Initramfs</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-09T00:00:00-07:00">
+                2018-08-09 00:00:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-01-08T16:45:38-08:00">
+                2020-01-08 16:45:38
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/09/2018-08-09-Initrd-And-Initramfs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/08/09/2018-08-09-Initrd-And-Initramfs/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  Learning about Initrd and Initramfs, which play important roles in switching on the computer and loading the operating system.
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Initrd-Initial-Ramdisk"><a href="#Initrd-Initial-Ramdisk" class="headerlink" title="Initrd (Initial Ramdisk)"></a>Initrd (Initial Ramdisk)</h3><ul>
+<li>参考文献：<a href="https://en.wikipedia.org/wiki/Initial_ramdisk" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Initial_ramdisk</a></li>
+</ul>
+<p>In computing (specifically in regards to Linux computing), <strong>initrd</strong> (initial ramdisk) is a scheme for loading a temporary root file system into memory, which may be used as part of the Linux startup process. <strong>initrd</strong> and <strong>initramfs</strong> refer to two different methods of achieving this. Both are commonly used too make preparations before the real root file system can be mounted.</p>
+<h4 id="Rationale"><a href="#Rationale" class="headerlink" title="Rationale"></a>Rationale</h4><p>Many Linux distributions ships a single, generic Linux kernel image - one that the distribution’s developers create specifically to boot on a wide variety of hardware. The device drivers for this generic kernel image are included as loadable kernel modules because statically compiling many drivers into one kernel causes the kernel image to be much larger, perhaps too large to boot on computers with limited memory. This then raises the problem of detecting and loading the modules necessary to mount the root file system at boot time, or for that matter, deducing where or what the root file system is.</p>
+<p>To further complicate matters, the root file system may be on a software RAID volume, LVM, NFS (on diskless workstations), or on an encrypted partition. All of these require special preparations to mount.</p>
+<p>Another complication is kernel support for hibernation, which suspends the computer to disk by dumping an image of the entire contents of memory to a swap partition or a regular file, then powering off. On next boot, this image has to be made accessible before it can be loaded back into memory.</p>
+<p>To avoid having to hardcode handling for so many special cases into the kernel, an initial boot stage with a temporary root file-system - now dubbed early user space - is used. This root file-system can contain user-space helpers which do the hardware detection, module loading and device discovery necessary to get the real root file-system mounted.</p>
+<h4 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h4><p>An image of this initial root file system (along with the kernel image) must be stored somewhere accessible by the Linux bootloader or the boot firmware of the computer. This can be the root file system itself, a boot image on an optical disc, a small partition on a local disk (a boot partition, usually using ext2 or FAT file systems), or a TFTP server (on systems that can boot from Ethernet).</p>
+<p>The bootloader will load the kernel and initial root file system image into memory and then start the kernel, passing in the memory address of the image. At the end of its boot sequence, the kernel tries to determine the format of the image from its first few blocks of data, which can lead either to the initrd or initramfs scheme.</p>
+<p>In the initrd scheme, the image may be a file system image (optionally compressed), which is made available in a special block device (/dev/ram) that is then mounted as the initial root file system. The driver for that file system must be compiled statically into the kernel. Many distributions originally used compressed ext2 file system images. while the others (including Debian 3.1) used cramfs in order to boot on memory-limited systems, since the cramfs image can be mounted in-place without requiring extra space for decompression. Once the initial root file system is up, the kernel executes /linuxrc as its first process; when it exits, the kernel assumes that the real root file system has been mounted and executes /sbin/init to begin the normal user-space boot process.</p>
+<p>In the initramfs scheme (available since the Linux kernel 2.6.13), the image may be a cpio archive (optionally compressed). The archive is unpacked by the kernel into a special instance of a tmpfs that becomes the initial root file system. This scheme has the advantage of not requiring an intermediate file system or block drivers to be compilted into the kernel. Some systems use the dracut package to create an initramfs image. In the initramfs scheme, the kernel executes /init as its first process that is not expected to exit. For some applications, initramfs can use the casper utility to create a writable environment using unionfs to overlay a persistence layer over a read-only root filesystem image. For example, overlay data can be stored on a USB flash drive, while a compressed SquashFS read-only image stored on a live CD acts as a root filesystem.</p>
+<p>Depending on which algorithms were compiled statically into it, the kernel can unpack initrd/initramfs images compressed with gzip, bzip2, LZMA, XZ, LZO, and LZ4.</p>
+<hr>
+<h3 id="Booting"><a href="#Booting" class="headerlink" title="Booting"></a>Booting</h3><ul>
+<li>参考文献：<a href="https://en.wikipedia.org/wiki/Booting" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Booting</a></li>
+</ul>
+<p>In computing, <strong>booting</strong> is starting up a computer or computer appliance until it can be used. It can be initiated by hardware such as a button press, or by software command. After the power is switched on the computer is relatively dumb, and can read only part of its storage called <strong>Read-only memory</strong>. There a small program is stored called <strong>firmware</strong>. It does power-on self-tests, and most importantly, allows accessing other types of memory, like <strong>hard disk</strong> and <strong>main memory</strong>. The firmware loads bigger programs into the computer’s main memory and runs it. In general purpose computers, but as well in smart phones, tablets, optionally a <strong>boot manager</strong> is run. It lets a user choose which operating system to run, and set more complex parameters for it. The firmware of the boot manager then loads the <strong>boot loader</strong> into the memory and runs it. This piece of software is able to place an <strong>operating system kernel</strong> like Windows or Linux into the computers main memory, and run it. Afterwards, the kernel runs so called <strong>user space software</strong>, well known is the <strong>graphical user interface</strong> which lets the user log in to the computer or run some other applications. The whole process may take seconds to tenths of seconds on modern day general purpose computers.</p>
+<p>Restarting a computer also is called reboot which can be “hard”, e.g., after eletrical power to the CPU is switched from off to on, or “soft”, where the poer is not cut. On some systems, a soft boot may optionally clear RAM to zero. Both hard and soft booting can be initiated by hardware such as a button press, or by software command. Booting is complete when the operative runtime system, typically operating system and some applications, is attained.</p>
+<p>The process of returning a computer from a state of hibernation or sleep does not involve booting. Minimally, some embedded systems do not require a noticeable boot sequence to begin functioning and when turned on may simply run operational programs that are stored in ROM. All computing systems are state machines, and a reboot may be the only method to return to a designated zero-state from an unintended, locked state.</p>
+<p>In addition to loading an operating system or stand-alone utility, the boot process can also load a storage dump program for diagnosing problems in an operating system.</p>
+<p>Boot is short for bootstrap or bootstrap load and derives from the phrase to pull oneself up by one’s bootstraps. The usage calls attention to the requirement that, if most software is loaded onto a computer by other software already running on the computer, some mechanism must exist to load the initial software onto the computer. Early computers used a variety of ad-hoc methods to get a small program into memory to solve this problem. The invention of read-only memory (ROM) of various types solved this paradox by allowing computers to be shipped with a start up program that could not be erased. Growth in the capacity of ROM has allowed ever more elaborate start up procedures to be implemented.</p>
+<h4 id="Modern-boot-loaders"><a href="#Modern-boot-loaders" class="headerlink" title="Modern boot loaders"></a>Modern boot loaders</h4><p>When a computer is turned off, its software-including operating systems, application code, and data-remains stored on non-volatile memory. When the computer is powered on, it typically does not have an operating system or its loader in random-access memory (RAM). The computer first executes a relatively small program stored in read-only memory (ROM) along with a small amount of needed data, to access the nonvolatile device or devices from which the operating system programs and data can be loaded into RAM.</p>
+<p>The small program that starts this sequence is known as a bootstrap loader, bootstrap or boot loader. This small program’s only job is to load other data and programs which are then executed from RAM. Often, multiple-stage boot loaders are used, during which several programs of increasing complexity load one after the other in a process of chain loading.</p>
+<h5 id="First-stage-boot-loader"><a href="#First-stage-boot-loader" class="headerlink" title="First-stage boot loader"></a>First-stage boot loader</h5><p>Boot loaders may face peculiar constraints, especially in size; for instance, on the IBM PC and compatibles, a boot sector should typically work in only 32KB (later relaxed to 64KB) of system memory and not use instructions not supported by the original 8088/8086 processors. The first stage of PC boot loaders (FSBL, first-stage boot loader) located on fixed disks and removable drives must fit into the first 446 bytes of the Master Boot Record in order to leave room for the default 64-byte partition table with four partition entries and the two-byte boot signature, which the BIOS requires for a proper boot loader - or even less, when additional features like more than four partition entries (up to 16 with 16 bytes each), a disk signature(6 bytes), a disk timestamp(6 bytes), and Advanced Active Partition(18 bytes) or special multi-boot loaders have to be supported as well in some environments. …</p>
+<p>Examples of first-stage bootloaders include coreboot, Libreboot and Das U-Boot.</p>
+<h5 id="Second-stage-boot-loader"><a href="#Second-stage-boot-loader" class="headerlink" title="Second-stage boot loader"></a>Second-stage boot loader</h5><p>Second -stage boot loaders, such as GNU GRUB, BOOTMGR, Syslinux, NTLDR or BootX, are not themselves operating systems, but are able to load an operating system properly and transfer execution to it; the operating system subsequently initializes itself and may load extra device drivers. The second-stage boot loader does not need drivers for its own operation, but may instead use generic storage access methods provided by system firmware such as the BIOS or Open Firmware, though typically with restricted hardware functionality and lower performance.</p>
+<p>Many boot loaders (like GNU GRUB, Windows’s BOOTMGR, and Windows NT/2000/XP’s NTLDR) can be configured to give the user multiple booting choices. These choices can include different operating systems (for dual or multi-booting from different partitions or drives), different versions of the same operating system (in case a new version has unexpected problems), different operating system loading options (e.g., booting into a resecue or safe mode), and some standalone programs that can function without an operaing system, such as memory testers (e.g., memtest86+), <strong>a basic shell (as in GNU GRUB)</strong>, or even games (see List of PC Booter games). Some boot loaders can also load other boot loaders; for example, <strong>GRUB loads BOOTMGR instead of loading Windows directly</strong>. Usually a default choice is preselected with a time delay during which a user can press a key to change the choice; after this delay, the default choice is automatically run so normal booting can occur without interaction.</p>
+<p>The boot process can be considered complete when the computer is ready to interact with the user, or the operating system is capable of running system programs or application programs.</p>
+<p>Many embedded systems must boot immediately. For example, waiting a minute for a digital television or a GPS navigation device to start is generally unacceptable. Therefore, such devices have software systems in ROM or flash memory so the device can begin functioning immediately; little or no loading is necessary, because the loading can be precomputed and stored on the ROM when the device is made.</p>
+<p>Large and complex systems may have boot procedures that proceed in multiple phases until finally the operating system and other programs are loaded and ready to execute. Because operating systems are designed as if they never start or stop, a boot loader might load the oeprating system, configure itself as a mere process within that system, and then irrevocably transfer control to the operating system. The boot loader then terminates normally as any other process would.</p>
+<h4 id="Personal-computers-PC"><a href="#Personal-computers-PC" class="headerlink" title="Personal computers (PC)"></a>Personal computers (PC)</h4><h5 id="Boot-devices"><a href="#Boot-devices" class="headerlink" title="Boot devices"></a>Boot devices</h5><p>The boot device is the device from which the operating system is loaded. A modern PC’s UEFI or BIOS firmware supports booting from various devices, typically a local solid state drive or hard disk drive via the <strong>GPT</strong> or <strong>Master Boot Record (MBR)</strong> on such a drive or disk, an optical disk drive (using El Torito), a USB mass storage device (FTL-based flash drive, SD card, or multi-media card slot; hard disk drive, optical disk drive, etc.), or a network interface card (using PXE). Older, less common BIOS-bootable devices include floppy disk drives, SCSI devices, Zip drives, and LS-120 drives.</p>
+<h5 id="Boot-sequence"><a href="#Boot-sequence" class="headerlink" title="Boot sequence"></a>Boot sequence</h5><p>Upon starting, and IBM-compatible personal computer’s x86 CPU executes, in real mode, the instruction located ate reset vector (the physical memory address FFFF0h on 16-bit x86 processors and FFFFFFF0h on 32-bit and 64-bit x86 processors), usually pointing to the <strong>firmware (UEFI or BIOS)</strong> entry point inside the ROM. This memory location typically contains a jump instruction that transfers execution to the location of the firmware (UEFI or BIOS) start-up program. This program runs a power-on self-test (POST) to check and initialize required devices such as DRAM and the PCI bus (including running embedded ROMs). The most complicated step is setting up DRAM over SPI, made more difficult by the fact that at this point memory is very limited.</p>
+<p>After initializing required hardware, the firmware (UEFI or BIOS) goes through a pre-configured list of non-volatile storage devices (“boot device sequence”) until it finds one that is bootable. A bootable MBR device is defined as one that can be read from, and where the last two bytes of the first sector contain the little-endian word AA55h, found as byte sequence 55h, AAh on disk (also known as the MBR boot signature), or where it is otherwise established that the code inside the sector is executable on x86 PCs.</p>
+<p>Once the BIOS has found a bootable device it loads the boot sector to linear address 7C00h (usually segment:offset 0000h:7C00h, but some BIOSes erroneously use 07C0h:0000h) and transfers execution to the boot code. In the case of a hard disk, this is referred to as the Master Boot Record (MBR) and is by definition not operating-system specific. The conventional MBR code checks the MBR’s partition table for a partition set as bootable (the one with active flag set). If an active partition is found, the MBR code loads the boot sector code from that partition, known as Volume Boot Record (VBR), and executes it. The VBR is often operating-system specific; however, in most operating systems its main function is to load and execute the operating system kernel, which continues startup.</p>
+<p>If there is no active partition, or the active partition’s boot sector is invalid, the MBR may load a secondary boot loader which will select a partition (often via user input) and load its boot sector, which usually loads the corresponding operating system kernel. In some cases, the MBR may also attempt to load secondary boot loaders before trying to boot the active partition. If all else fails, it should issue an INT 18h BIOS interrupt call (followed by an INT 19h just in case INT 18h would return) in order to give back control to the BIOS, which would then attempt to boot off other devices, attempt a remote boot via network or invoke ROM BASIC.</p>
+<hr>
+<h3 id="Initrd"><a href="#Initrd" class="headerlink" title="Initrd"></a>Initrd</h3><p>Linux初始化RAM磁盘（initrd）是在系统引导（boot，引导程序bootstrap）过程中挂载的一个临时根文件系统，用来支持两阶段的引导过程。initrd文件中包含了各种可执行程序和驱动程序，它们可以用来挂载实际的根文件系统，然后再将这个initrd RAM磁盘卸载，并释放内存。在很多嵌入式Linux系统中，initrd就是最终的根文件系统。</p>
+<p>initrd是在实际根文件系统可用之前挂载到系统中的一个初始根文件系统。initrd与内核绑定在一起，并作为内核引导过程的一部分进行加载。内核然后会将这个initrd文件作为其两阶段引导过程的一部分来加载模块，这样才能稍后使用真正的文件系统，并挂载实际的根文件系统。</p>
+<p>initrd中包含了实现这个目标所需要的目录和可执行程序的最小集合，例如将内核模块加载到内核中所使用的insmod工具。</p>
+<p>在桌面或服务器Linux系统中，initrd是一个临时的文件系统。其生存周期很短，只会用作到真实文件系统的一个桥梁。在没有存储设备的嵌入式系统中，initrd是永久的根文件系统。</p>
+<h3 id="Initramfs"><a href="#Initramfs" class="headerlink" title="Initramfs"></a>Initramfs</h3><p>Initramfs是在ramfs的cache实现上加了一层很薄的封装，其他内核开发人员编写了一个改进版tmpfs，这个文件系统上的数据可以写出到交换分区，而且可以设定一个tmpfs装载点的最大尺寸以免耗尽内存。initramfs就是tmpfs的一个应用。</p>
+<p>最初的想法是Linus提出的：把cache当做文件系统装载。</p>
+<hr>
+<p>power-on -&gt; firmware in ROM (UEFI or BIOS) -&gt; power-on self-test (POST, accessing hard disk and main memory) -&gt; load boot manager into main memory -&gt; load boot loader (e.g., GRUB) -&gt; place operating system kernel into main memory -&gt; run user space software (GUI)</p>
+<pre><code>initrd和GRUB，initrd和内核，initrd和根文件系统，文件系统和操作系统
+
+1. GRUB中知识简单地把initrd拷贝在内存中指定的位置，没有对它做进一步的操作，由内核来初始化这段内存区域。GRUB不参与Linux内核的初始化，它是与内核独立的。
+2. 文件系统时操作系统用于明确存储设备（常见的是磁盘，也有基于NAND Flash的固态硬盘）或分区上的文件的方法和数据结构；即在存储设备上组织文件的方法。
+3. 操作系统中负责管理和存储文件信息的软件机构称为文件管理系统，简称文件系统。
+4. 根文件系统简单来说就是系统第一个mount的文件系统
+5. ramdisk是在ram上实现的块设备，initrd是启动过程中用到的一种机制。在装载linux之前，bootloader可以把一个比较小的根文件系统的映像装载在内存的某个指定位置，然后通过传递参数的方式告诉内核initrd的起始地址和大小，在启动阶段就可以暂时用initrd来mount根文件系统。initrd最初的目的是为了把kernel的启动分成两个阶段，在kernel中保留最少最基本的启动代码，然后把对各种恶样硬件设备的支持以模块的方式放在initrd中，这样就在启动过程中可以从initrd所mount的根文件系统中装载需要的模块。这样的一个好处是在保持kernel不变的情况下，通过修改initrd中的内容就可以灵活的支持不同的硬件。在启动完成的最后阶段，根文件系统可以重新mount到其他设备上，但是也可以不再重新mount（很多嵌入式系统就是这样）。
+6. initrd具体实现过程：bootloader把根文件系统映像装载到内存指定位置，把相关参数传递给内核，内核启动时把initrd中的内容复制到ramdisk中（ram0），把initrd占用的内存释放掉，在ram0上mount根文件系统。从这个过程中可以看出，内核需要同时对ramdisk和initrd的支持。
+7. Linux启动不必一定使用initrd，如果把需要的功能全部编译到内核中（非模块方式），只需要一个内核文件即可。initrd能够减小启动内核的体积并增加灵活性。
+8. GRUB是file-system sensiive的，能够识别常见的文件系统
+9. initrd是linux在系统引导过程中使用的一个临时的根文件系统，用来支持两阶段的引导过程。再白话一点，initrd就是一个带有根文件系统的虚拟RAM盘，里面包含了根目录‘/’，以及其他的目录，比如：bin，dev，proc，sbin，sys等linux启动时必须的目录，以及在bin目录下加入了一下必须的可执行命令。</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Learning/" rel="tag"># Learning</a>
+          
+            <a href="/tags/Computer/" rel="tag"># Computer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/23/2018-07-23-Git-Flow/" rel="next" title="Git Flow">
+                <i class="fa fa-chevron-left"></i> Git Flow
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/17/2018-08-17-Float/" rel="prev" title="Float">
+                Float <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Kaixin Yang (Cayson)" />
+            
+              <p class="site-author-name" itemprop="name">Kaixin Yang (Cayson)</p>
+              <p class="site-description motion-element" itemprop="description">I wish I could be your sunshine.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initrd-Initial-Ramdisk"><span class="nav-number">1.</span> <span class="nav-text">Initrd (Initial Ramdisk)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rationale"><span class="nav-number">1.1.</span> <span class="nav-text">Rationale</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Implementation"><span class="nav-number">1.2.</span> <span class="nav-text">Implementation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Booting"><span class="nav-number">2.</span> <span class="nav-text">Booting</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Modern-boot-loaders"><span class="nav-number">2.1.</span> <span class="nav-text">Modern boot loaders</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#First-stage-boot-loader"><span class="nav-number">2.1.1.</span> <span class="nav-text">First-stage boot loader</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Second-stage-boot-loader"><span class="nav-number">2.1.2.</span> <span class="nav-text">Second-stage boot loader</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Personal-computers-PC"><span class="nav-number">2.2.</span> <span class="nav-text">Personal computers (PC)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Boot-devices"><span class="nav-number">2.2.1.</span> <span class="nav-text">Boot devices</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Boot-sequence"><span class="nav-number">2.2.2.</span> <span class="nav-text">Boot sequence</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Initrd"><span class="nav-number">3.</span> <span class="nav-text">Initrd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Initramfs"><span class="nav-number">4.</span> <span class="nav-text">Initramfs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kaixin Yang (Cayson)</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ykxs-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://sceneryinmirror.github.io/2018/08/09/2018-08-09-Initrd-And-Initramfs/';
+          this.page.identifier = '2018/08/09/2018-08-09-Initrd-And-Initramfs/';
+          this.page.title = 'Initrd and Initramfs';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ykxs-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

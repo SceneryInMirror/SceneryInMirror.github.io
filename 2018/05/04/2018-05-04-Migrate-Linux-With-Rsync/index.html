@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Learning,Computer,Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="For the reason that I installed a new SSD, I need to migrate my operating system from the old HDD to the new SSD. And Fugoes suggested me to try rsync to realize it. I think it is a such effective way">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Migrate Linux with rsync">
+<meta property="og:url" content="https://sceneryinmirror.github.io/2018/05/04/2018-05-04-Migrate-Linux-With-Rsync/index.html">
+<meta property="og:site_name" content="Kaixin&#39;s Kingdom">
+<meta property="og:description" content="For the reason that I installed a new SSD, I need to migrate my operating system from the old HDD to the new SSD. And Fugoes suggested me to try rsync to realize it. I think it is a such effective way">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-05-04T23:10:00.000Z">
+<meta property="article:modified_time" content="2020-01-09T00:45:38.586Z">
+<meta property="article:author" content="Kaixin Yang (Cayson)">
+<meta property="article:tag" content="Learning">
+<meta property="article:tag" content="Computer">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sceneryinmirror.github.io/2018/05/04/2018-05-04-Migrate-Linux-With-Rsync/"/>
+
+
+
+
+
+  <title>Migrate Linux with rsync | Kaixin's Kingdom</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kaixin's Kingdom</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个处女座叨叨叨叨的小世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sceneryinmirror.github.io/2018/05/04/2018-05-04-Migrate-Linux-With-Rsync/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kaixin Yang (Cayson)">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kaixin's Kingdom">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Migrate Linux with rsync</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-04T16:10:00-07:00">
+                2018-05-04 16:10:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-01-08T16:45:38-08:00">
+                2020-01-08 16:45:38
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/04/2018-05-04-Migrate-Linux-With-Rsync/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/04/2018-05-04-Migrate-Linux-With-Rsync/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  For the reason that I installed a new SSD, I need to migrate my operating system from the old HDD to the new SSD. And Fugoes suggested me to try rsync to realize it. I think it is a such effective way to migrate or backup files. It has other useful functions and I will try them later.
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>参考文献：</p>
+<p><a href="https://blog.csdn.net/dk_mcu/article/details/51864117" target="_blank" rel="noopener">https://blog.csdn.net/dk_mcu/article/details/51864117</a></p>
+<p><a href="www.rdeeson.com/weblog/157/moving-arch-linux-to-a-new-ssd-with-rsync">www.rdeeson.com/weblog/157/moving-arch-linux-to-a-new-ssd-with-rsync</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Rsync#File_system_cloning" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Rsync#File_system_cloning</a></p>
+<p><a href="https://www.cnblogs.com/f-ck-need-u/p/7220009.html" target="_blank" rel="noopener">https://www.cnblogs.com/f-ck-need-u/p/7220009.html</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/GRUB" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/GRUB</a></p>
+<hr>
+<p>rsync能实现Linux系统下的数据备份，相比于<code>cp -u</code>,’scp’,’dd’有其特殊优势，有很多关于这几种命令对比的文章。</p>
+<p>这里使用rsync实现不同硬盘间系统备份，并从新的硬盘引导启动系统的目标。</p>
+<h3 id="分区及格式化"><a href="#分区及格式化" class="headerlink" title="分区及格式化"></a>分区及格式化</h3><p>使用parted和mkfs命令即可，可查阅相关教程，没有太多坑。</p>
+<h3 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h3><ol>
+<li><p>一定认真阅读 ArchWiki 里面关于 <a href="https://wiki.archlinux.org/index.php/Rsync#Full_system_backup" target="_blank" rel="noopener">Full system backup</a> 的内容！</p>
+</li>
+<li><p>使用命令：</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync -aAXv --exclude=&#123;<span class="string">"/dev/*"</span>,<span class="string">"/proc/*"</span>,<span class="string">"/sys/*"</span>,<span class="string">"/tmp/*"</span>,<span class="string">"/run/*"</span>,<span class="string">"/mnt/*"</span>,<span class="string">"/media/*"</span>,<span class="string">"/lost+found"</span>&#125; / /path/to/backup/folder</span><br></pre></td></tr></table></figure>
+
+<p>注意：<br>rsync一定要有合适的<code>--exclude</code>参数，否则可能进入循环无限复制直至写满！！！</p>
+<h3 id="修改fstab"><a href="#修改fstab" class="headerlink" title="修改fstab"></a>修改fstab</h3><p>进入新硬盘，编辑<code>/etc/fstab</code>（需要sudo），注意UUID与硬盘的对应关系，将旧硬盘作为挂载，新硬盘作为根文件系统；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个显示硬盘UUID的命令：</span></span><br><span class="line">ls -l /dev/disk/by-uuid</span><br></pre></td></tr></table></figure>
+<h3 id="安装os-prober"><a href="#安装os-prober" class="headerlink" title="安装os-prober"></a>安装os-prober</h3><p>根据教程的说法，os-prober与Grub相对应，使用Grub必须install os-prober。</p>
+<p>原ubuntu已经有os-prober了，所以不太清楚不install会怎样。</p>
+<h3 id="chroot"><a href="#chroot" class="headerlink" title="chroot"></a>chroot</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line"><span class="built_in">cd</span> /mnt/newarch</span><br><span class="line"><span class="comment">#将原系统proc sys dev目录下的内容挂载到新系统下</span></span><br><span class="line">mount -t proc proc proc/</span><br><span class="line">mount --rbind /sys sys/</span><br><span class="line">mount --rbind /dev dev/</span><br><span class="line"><span class="comment">#改变root路径</span></span><br><span class="line">chroot /mnt/newarch /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="重新安装bootloader"><a href="#重新安装bootloader" class="headerlink" title="重新安装bootloader"></a>重新安装bootloader</h3><ol>
+<li><p>因为我的机器是x86_64，分区GPT，使用EFI启动，所以教程里给出的关于i386的BIOS方法不适合我。这里使用的命令是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sdb2 /boot/efi</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot/efi --recheck --debug</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>/dev/sdb2</code>是EFI分区，挂载到<code>/boot/efi</code>下，<code>grub-install</code>里的<code>--efi-directory</code>对应的就是EFI分区挂载点路径。<code>grub-mkconfig</code>更新grub配置信息，从而可以在开机启动的目录中显示新的操作系统启动路径。</p>
+</li>
+<li><p>从chroot后的su中退出，再使用一遍上面的<code>grub-mkconfig</code>命令，则两个系统都能发现对方。</p>
+</li>
+</ol>
+<h3 id="others"><a href="#others" class="headerlink" title="others"></a>others</h3><ol>
+<li><p>完成之后误操作了一次，又使用了一遍rsync命令，导致新系统内的etc/fstab信息和grub信息和原系统相同，只能重复一遍上述操作。然后就考虑如果以后还有从原系统同步到新系统的需求（貌似没有[捂脸]），后续同步时可以改一下上面的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rsync -aAXv /* /mnt/newarch --exclude=&#123;/dev/*,/proc/*,/sys/*,/tmp/*,/var/tmp/*,/run/*,/mnt/*,/media/*,/lost+found,/etc/fstab,/boot/efi,/boot/grub/grub.cfg&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不过没有尝试，只是这么想想，所以嗯…慎用慎用…</p>
+</li>
+<li><p>做了一件更蠢的事情…原来照抄archwiki教程，在<code>grub-install</code>命令中加入了<code>--bootloader-id=grub</code>，导致生成的操作系统信息在一个名为grub的新文件夹里，但没有更新原grub中的信息。</p>
+<p>结果是，在BIOS里面看到了一个SSD上的grub，grub能正常引导，但在新操作系统中使用update-grub并没有效果，反而在原系统中使用有效。</p>
+<p>然后以为是BIOS只能从HDD引导启动，拔了HDD发现grub配置废了，就觉得事情没有这么简单…</p>
+<p>之后认真比较了两个系统里<code>/boot/efi</code>下的内容，发现新系统中<code>grub-install</code>只更新了grub目录下的内容但没有更新ubuntu目录下的内容，才明白<code>--bootloader</code>是啥意思…之后就用上面的命令，更新了ubuntu目录下的内容，删了grub目录，BIOS里面看不到那个神奇的grub引导，直接进ubuntu后就是grub界面，然后就可以正常使用了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原来坑死自己的命令：</span></span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub</span><br></pre></td></tr></table></figure>
+
+<p>拔HDD造成的结果是windows半天认不出来HDD然后磁盘检查了好久…</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Learning/" rel="tag"># Learning</a>
+          
+            <a href="/tags/Computer/" rel="tag"># Computer</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/28/2018-04-28-PCB-Design-Debug/" rel="next" title="PCB Design Debug">
+                <i class="fa fa-chevron-left"></i> PCB Design Debug
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/10/2018-05-10-PhxSQL/" rel="prev" title="PhxSQL">
+                PhxSQL <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Kaixin Yang (Cayson)" />
+            
+              <p class="site-author-name" itemprop="name">Kaixin Yang (Cayson)</p>
+              <p class="site-description motion-element" itemprop="description">I wish I could be your sunshine.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#分区及格式化"><span class="nav-number">1.</span> <span class="nav-text">分区及格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备份"><span class="nav-number">2.</span> <span class="nav-text">备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改fstab"><span class="nav-number">3.</span> <span class="nav-text">修改fstab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装os-prober"><span class="nav-number">4.</span> <span class="nav-text">安装os-prober</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chroot"><span class="nav-number">5.</span> <span class="nav-text">chroot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重新安装bootloader"><span class="nav-number">6.</span> <span class="nav-text">重新安装bootloader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#others"><span class="nav-number">7.</span> <span class="nav-text">others</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kaixin Yang (Cayson)</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ykxs-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://sceneryinmirror.github.io/2018/05/04/2018-05-04-Migrate-Linux-With-Rsync/';
+          this.page.identifier = '2018/05/04/2018-05-04-Migrate-Linux-With-Rsync/';
+          this.page.title = 'Migrate Linux with rsync';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ykxs-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

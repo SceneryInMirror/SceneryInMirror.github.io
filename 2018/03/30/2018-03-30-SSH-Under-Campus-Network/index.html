@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Computer,Network," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="As I have more than one computers, I want to ssh one by another one. Here are the ways to realize ssh under campus network.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH Under Campus Network">
+<meta property="og:url" content="https://sceneryinmirror.github.io/2018/03/30/2018-03-30-SSH-Under-Campus-Network/index.html">
+<meta property="og:site_name" content="Kaixin&#39;s Kingdom">
+<meta property="og:description" content="As I have more than one computers, I want to ssh one by another one. Here are the ways to realize ssh under campus network.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-03-31T05:42:00.000Z">
+<meta property="article:modified_time" content="2020-01-09T00:45:38.583Z">
+<meta property="article:author" content="Kaixin Yang (Cayson)">
+<meta property="article:tag" content="Computer">
+<meta property="article:tag" content="Network">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sceneryinmirror.github.io/2018/03/30/2018-03-30-SSH-Under-Campus-Network/"/>
+
+
+
+
+
+  <title>SSH Under Campus Network | Kaixin's Kingdom</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kaixin's Kingdom</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个处女座叨叨叨叨的小世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sceneryinmirror.github.io/2018/03/30/2018-03-30-SSH-Under-Campus-Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kaixin Yang (Cayson)">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kaixin's Kingdom">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SSH Under Campus Network</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-30T22:42:00-07:00">
+                2018-03-30 22:42:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-01-08T16:45:38-08:00">
+                2020-01-08 16:45:38
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/30/2018-03-30-SSH-Under-Campus-Network/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/30/2018-03-30-SSH-Under-Campus-Network/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  As I have more than one computers, I want to ssh one by another one. Here are the ways to realize ssh under campus network.
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="两台机器都在路由器下"><a href="#两台机器都在路由器下" class="headerlink" title="两台机器都在路由器下"></a>两台机器都在路由器下</h3><ul>
+<li><p>直接使用路由器局域网下分配的 IP 192.168.<em>.</em> 访问，端口22</p>
+</li>
+<li><p>树莓派用了有线和无线两种不同的连接方式，对应路由器下的IP不同</p>
+</li>
+<li><p>利用MAC地址固定IP：</p>
+<ul>
+<li><p>lenovo-z41-70: 192.168.1.101</p>
+</li>
+<li><p>thinkpad: 192.168.1.102</p>
+</li>
+<li><p>raspberry pi(eth0): 192.168.1.100</p>
+</li>
+<li><p>raspberry pi(wlan0): 192.168.1.104</p>
+</li>
+</ul>
+</li>
+<li><p>除了SSH还可以使用VNC，图形化远程</p>
+</li>
+</ul>
+<h3 id="一台机器在路由器下一台机器在校园网下"><a href="#一台机器在路由器下一台机器在校园网下" class="headerlink" title="一台机器在路由器下一台机器在校园网下"></a>一台机器在路由器下一台机器在校园网下</h3><ul>
+<li><p>两台机器可以互相访问</p>
+</li>
+<li><p>路由器下机器访问校园网下机器直接SSH对方IP即可，无线 10.2.<em>.</em>，有线 10.128.<em>.</em></p>
+</li>
+<li><p>校园网下机器访问路由器下机器要通过设置路由器的端口映射实现：</p>
+<ul>
+<li><p>192.168.1.102 -&gt; 21</p>
+</li>
+<li><p>192.168.1.104 -&gt; 80</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="两台机器都在校园网下"><a href="#两台机器都在校园网下" class="headerlink" title="两台机器都在校园网下"></a>两台机器都在校园网下</h3><ul>
+<li><p>无法通过IP地址SSH访问对方，不论是IPv4还是IPv6</p>
+</li>
+<li><p>互访的一种间接方法是：先SSH到路由器下的机器上，再SSH到对方机器</p>
+</li>
+</ul>
+<h3 id="上传下载"><a href="#上传下载" class="headerlink" title="上传下载"></a>上传下载</h3><p>参考文献：<a href="https://www.cnblogs.com/magicc/p/6490566.html" target="_blank" rel="noopener">https://www.cnblogs.com/magicc/p/6490566.html</a></p>
+<ul>
+<li><p>上传本地文件到服务器</p>
+<blockquote>
+<p>scp /path/filename username@servername:/path/</p>
+</blockquote>
+<blockquote>
+<p>eg: scp /var/www/test.php <a href="mailto:root@192.168.0.101">root@192.168.0.101</a>:/var/www/</p>
+</blockquote>
+</li>
+<li><p>从服务器上下载文件</p>
+<blockquote>
+<p>scp username@servername:/path/filename /var/www/local_dir</p>
+</blockquote>
+</li>
+<li><p>上传目录到服务器</p>
+<blockquote>
+<p>scp -r local_dir username@servername:remote_dir</p>
+</blockquote>
+<blockquote>
+<p>eg: scp -r test <a href="mailto:root@192.168.0.101">root@192.168.0.101</a>:/var/www/</p>
+</blockquote>
+</li>
+<li><p>从服务器下载整个目录</p>
+<blockquote>
+<p>scp -r username@servername:/var/www/remote_dir/ /var/www/local_dir</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="额外发现"><a href="#额外发现" class="headerlink" title="额外发现"></a>额外发现</h3><ul>
+<li><p>Fugoes同学提醒，连接Wireless PKU不做网页登录时是可以访问IPv6的，并且ifconfig发现此时也已经分配到IPv4地址，但IPv4不通</p>
+</li>
+<li><p>Linux主机做server之前需要apt-get install openssh-server，RPi做server之前要在raspi-config里面enable SSH</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Computer/" rel="tag"># Computer</a>
+          
+            <a href="/tags/Network/" rel="tag"># Network</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/29/2018-03-29-Raspberry-Pi-Do/" rel="next" title="Raspberry Pi. Do">
+                <i class="fa fa-chevron-left"></i> Raspberry Pi. Do
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/31/2018-03-31-Git-Repository-Instructions/" rel="prev" title="Git Repository Instructions">
+                Git Repository Instructions <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Kaixin Yang (Cayson)" />
+            
+              <p class="site-author-name" itemprop="name">Kaixin Yang (Cayson)</p>
+              <p class="site-description motion-element" itemprop="description">I wish I could be your sunshine.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#两台机器都在路由器下"><span class="nav-number">1.</span> <span class="nav-text">两台机器都在路由器下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一台机器在路由器下一台机器在校园网下"><span class="nav-number">2.</span> <span class="nav-text">一台机器在路由器下一台机器在校园网下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两台机器都在校园网下"><span class="nav-number">3.</span> <span class="nav-text">两台机器都在校园网下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传下载"><span class="nav-number">4.</span> <span class="nav-text">上传下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#额外发现"><span class="nav-number">5.</span> <span class="nav-text">额外发现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kaixin Yang (Cayson)</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ykxs-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://sceneryinmirror.github.io/2018/03/30/2018-03-30-SSH-Under-Campus-Network/';
+          this.page.identifier = '2018/03/30/2018-03-30-SSH-Under-Campus-Network/';
+          this.page.title = 'SSH Under Campus Network';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ykxs-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

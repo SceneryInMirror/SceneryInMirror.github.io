@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Learning,Computer," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Recently while learning to develop RPi and C51, I met a lot of kinds of serial buses. Here is the summary of all these buses.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Serial Bus Protocol">
+<meta property="og:url" content="https://sceneryinmirror.github.io/2018/04/22/2018-04-22-Bus-Protocol/index.html">
+<meta property="og:site_name" content="Kaixin&#39;s Kingdom">
+<meta property="og:description" content="Recently while learning to develop RPi and C51, I met a lot of kinds of serial buses. Here is the summary of all these buses.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219452.png">
+<meta property="og:image" content="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219453.png">
+<meta property="og:image" content="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219454.png">
+<meta property="og:image" content="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219455.png">
+<meta property="og:image" content="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219456.png">
+<meta property="og:image" content="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/spi.jpg?raw=true">
+<meta property="og:image" content="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/CPHA.jpg?raw=true">
+<meta property="og:image" content="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/mode.jpg?raw=true">
+<meta property="og:image" content="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/main_mode.jpg?raw=true">
+<meta property="og:image" content="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/frame_structure.png?raw=true">
+<meta property="article:published_time" content="2018-04-23T02:08:00.000Z">
+<meta property="article:modified_time" content="2020-01-09T00:45:38.585Z">
+<meta property="article:author" content="Kaixin Yang (Cayson)">
+<meta property="article:tag" content="Learning">
+<meta property="article:tag" content="Computer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219452.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://sceneryinmirror.github.io/2018/04/22/2018-04-22-Bus-Protocol/"/>
+
+
+
+
+
+  <title>Serial Bus Protocol | Kaixin's Kingdom</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kaixin's Kingdom</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一个处女座叨叨叨叨的小世界</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://sceneryinmirror.github.io/2018/04/22/2018-04-22-Bus-Protocol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kaixin Yang (Cayson)">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kaixin's Kingdom">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Serial Bus Protocol</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-22T19:08:00-07:00">
+                2018-04-22 19:08:00
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-01-08T16:45:38-08:00">
+                2020-01-08 16:45:38
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blog/" itemprop="url" rel="index">
+                    <span itemprop="name">blog</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/22/2018-04-22-Bus-Protocol/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/04/22/2018-04-22-Bus-Protocol/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  Recently while learning to develop RPi and C51, I met a lot of kinds of serial buses. Here is the summary of all these buses.
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="I2C总线协议"><a href="#I2C总线协议" class="headerlink" title="I2C总线协议"></a>I2C总线协议</h2><ol start="0">
+<li><p>Inter-Integrated Circuit，<strong>双向</strong> 二进制 <strong>同步</strong> <strong>串行</strong> 总线，<strong>2根线</strong>。</p>
+</li>
+<li><p>2根线：I2C总线在物理连接上非常简单，分别由SDA(串行数据线)和SCL(串行时钟线)及上拉电阻组成。通信原理是通过对SCL和SDA弦高低电平时序的控制，来产生I2C总线协议所需要的信号进行数据传递。在总线空闲时，这两根线一般被上面所接的上拉电阻拉高，保持着高电平。</p>
+</li>
+<li><p>主从结构：I2C总线上的每一个设备都可以作为主设备或者从设备，而且每一个设备都会对应一个唯一的地址。在通常的应用中，我们把CPU带I2C总线接口的模块作为主设备，把挂载在总线上的其他设备都作为从设备。I2C总线上的主设备与从设备之间以字节(8位)为单位进行双向的数据传输。</p>
+</li>
+<li><p>速率：I2C总线数据传输速率在标准模式下可达100kbit/s，快速模式下可达400kbit/s，高速模式下可达3.4Mbit/s。一般通过I2C总线接口可编程时钟来实现传输速率的调整，同时也跟所接的上拉电阻的阻值有关。</p>
+</li>
+<li><p>I2C协议：总线上数据的传输必须以一个起始信号作为开始条件，以一个结束信号作为传输的停止条件。起始和结束信号总是由主设备产生。总线在空闲状态时，SCL和SDA都保持着高电平，当SCL为高电平而SDA由高到低的跳变，表示产生一个起始条件；当SCL为高而SDA由低到高的跳变，表示产生一个停止条件。</p>
+<p>数据传输以字节为单位。主设备在SCL线上产生每个时钟脉冲的过程中将在SDA线上传输一个数据位，当一个字节按数据位从高位到低位的顺序传输完后，紧接着从设备将拉低SDA线，回传给主设备一个应答位，此时才认为一个字节真正的被传输完成。当然，并不是所有的字节传输都必须有一个应答位，比如：当从设备不能再接收主设备发送的数据时，从设备将回传一个否定应答位。</p>
+<p>主设备在传输有效数据之前要先指定从设备的地址，地址指定的过程和上面数据传输的过程一样，只不过大多数从设备的地址是7位的，然后协议规定再给地址添加一个最低位用来表示接下来数据传输的方向，0表示主设备向从设备写数据，1表示主设备向从设备读数据。</p>
+</li>
+</ol>
+<p>图1：I2C数据传输</p>
+<p><img src="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219452.png" alt="img"></p>
+<p>图2：I2C地址指定</p>
+<p><img src="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219453.png" alt="img"></p>
+<p>图3：I2C主设备写入从设备</p>
+<p><img src="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219454.png" alt="img"></p>
+<p>图4：I2C主设备读取从设备</p>
+<p><img src="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219455.png" alt="img"></p>
+<p>图5：I2C主设备读写从设备<img src="http://www.embeddedlinux.org.cn/uploads/allimg/130317/1219456.png" alt="img"></p>
+<p>参考文献：<a href="https://blog.csdn.net/w89436838/article/details/38660631" target="_blank" rel="noopener">https://blog.csdn.net/w89436838/article/details/38660631</a></p>
+<h2 id="SPI总线协议"><a href="#SPI总线协议" class="headerlink" title="SPI总线协议"></a>SPI总线协议</h2><ol start="0">
+<li><p>Serial Peripheral Interface，高速 <strong>全双工</strong> <strong>同步</strong> <strong>串行</strong> 通信总线，<strong>4根线</strong>。</p>
+</li>
+<li><p>4条线：3条总线(SCK, MOSI, MISO)和1条片选(NSS)；SPI通信以NSS线电平置低为起始信号，以NSS线电平被拉高为停止信号。</p>
+<p><img src="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/spi.jpg?raw=true" alt="spi"></p>
+</li>
+<li><p>通信模式：MOSI和MISO线在SCK的每个时钟周期传输一位数据，开发者可以自行设置MSB或LSB先行，不过需要保证两个通讯设备都使用同样的协定。</p>
+<p>SPI有四种通讯模式，在SCK上升沿触发，下降沿采样只是其中一种模式。四种模式的主要区别便是总线空闲时SCK的状态及数据采样时刻。这涉及到“时钟极性CPOL”和“时钟相位CPHA”，由CPOL和CPHA的组合而产生了四种的通讯模式。</p>
+<ul>
+<li><p>CPOL：即在没有数据传输时，时钟的空闲状态的电平。</p>
+</li>
+<li><p>CPHA：即数据的采样时刻。</p>
+</li>
+</ul>
+<p>如果CPOL被清0，则SCK在空闲状态保持低电平，反之被置1则保持高电平；如果CPHA位被清0，则在SCK每个时钟周期的第1个边沿（奇数边沿）进行数据位采样，反之被置1则在SCK每个时钟周期的第2个边沿（偶数边沿）采样。</p>
+<p><img src="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/CPHA.jpg?raw=true" alt="CPHA"></p>
+<p><img src="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/mode.jpg?raw=true" alt="mode"></p>
+</li>
+<li><p>通信过程：通过控制选定的NSS信号线的电平高低决定通信的起始与否。</p>
+</li>
+</ol>
+<blockquote>
+<p>查阅stm32引脚原理图可知，芯片有提供一个连接到从设备的NSS引脚。但实际中很多常常会在初始化外设时将NSS引脚配置为软件控制，换言之，就是将NSS引脚当做是一个普通GPIO引脚，而通过控制该引脚的电平状态来产生起始/停止信号。</p>
+</blockquote>
+<ul>
+<li><p>把需要发送的数据写入数据寄存器SPI_DR，该数据会被写入到发送缓冲区；</p>
+</li>
+<li><p>SCK开始运行，MOSI线通过移位寄存器把发送缓冲区的数据逐位传输。全双工模式下，发送和接收是同时进行的，此时MISO则把数据一位一位存进接收缓冲区；</p>
+</li>
+<li><p>传输完成一帧数据后，状态寄存器SPI_SR的TXE位会被置1，表示发送缓冲区为空，可以再次往SPI_DR写入数据进行发送；RXNE位也被置1，表示接收缓冲区非空，可以读取缓冲区数据获取内容。</p>
+<p><img src="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/main_mode.jpg?raw=true" alt="main_mode"></p>
+<p>全双工模式下，接收和发送是同时进行的，即使是只接收数据，也是需要向从设备发送数据，以触发SCK时钟的运行，这样从设备才能向主机发送数据。例如常常通过读取从设备的ID，以此识别设备，我们就需要向设备发送相应指令以获取设备ID（可以通过阅读设备手册获得具体指令）。</p>
+</li>
+</ul>
+<p>参考文献：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/27376153" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/27376153</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/27462822" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/27462822</a></p>
+<h2 id="UART总线协议"><a href="#UART总线协议" class="headerlink" title="UART总线协议"></a>UART总线协议</h2><ol start="0">
+<li><p>Universal Asynchronous Receiver/Transmitter，一种异步收发传输器，它将要传输的资料在串行通信与并行通信之间加以转换。作为把并行输入信号转成串行输出信号的芯片，UART通常被集成于其他通讯接口的连结上，一般是RS-232C规格的。在UART上追加同步方式的序列信号变换电路的产品，被称为USART(Universal Synchronous Asynchronous Receiver Transmitter)。</p>
+<p> UART是一种通用 <strong>串行</strong> 数据总线，<strong>双向</strong> <strong>异步</strong> 通信，可实现 <strong>全双工</strong> 传输和接收，<strong>1根线</strong>。</p>
+</li>
+<li><p>数据收发：发送时，数据被写入发送FIFO。如果UART 被使能，则会按照预先设置好的参数（波特率、数据位、停止位、校验位等）开始发送数据，一直到发送FIFO 中没有数据。一旦向发送FIFO 写数据（如果FIFO 未空），UART 的忙标志位BUSY 就有效，并且在发送数据期间一直保持有效。BUSY 位仅在发送FIFO 为空，且已从移位寄存器发送最后一个字符，包括停止位时才变无效。即 UART 不再使能，它也可以指示忙状态。</p>
+<p>在UART 接收器空闲时，如果数据输入变成“低电平”，即接收到了起始位，则接收计数器开始运行，并且数据在Baud16 的第8 个周期被采样。如果Rx 在Baud16 的第8 周期仍然为低电平，则起始位有效，否则会被认为是错误的起始位并将其忽略。如果起始位有效，则根据数据字符被编程的长度，在 Baud16 的每第 16 个周期（即一个位周期之后）对连续的数据位进行采样。如果奇偶校验模式使能，则还会检测奇偶校验位。最后，如果Rx 为高电平，则有效的停止位被确认，否则发生帧错误。当接收到一个完整的字符时，将数据存放在接收FIFO 中。</p>
+</li>
+<li><p>帧结构</p>
+</li>
+</ol>
+<img src="https://github.com/SceneryInMirror/SceneryInMirror.github.io/blob/master/assets/img/bus_protocol/frame_structure.png?raw=true" width = "700" height = "250" alt="frame_structure" />
+
+<p>参考文献：</p>
+<p><a href="https://baike.baidu.com/item/UART" target="_blank" rel="noopener">https://baike.baidu.com/item/UART</a></p>
+<p><a href="https://www.cnblogs.com/lulipro/p/5994368.html" target="_blank" rel="noopener">https://www.cnblogs.com/lulipro/p/5994368.html</a></p>
+<hr>
+<p>图片来源：[<a href="http://xilinx.eetrend.com/article/12037(SPI、UART、I2C三种串行总线简介)]" target="_blank" rel="noopener">http://xilinx.eetrend.com/article/12037(SPI、UART、I2C三种串行总线简介)]</a>(<a href="http://xilinx.eetrend.com/article/12037" target="_blank" rel="noopener">http://xilinx.eetrend.com/article/12037</a>   SPI、UART、I2C三种串行总线简介)</p>
+<p>推荐阅读：<a href="https://blog.csdn.net/ivy_reny" target="_blank" rel="noopener">https://blog.csdn.net/ivy_reny</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Learning/" rel="tag"># Learning</a>
+          
+            <a href="/tags/Computer/" rel="tag"># Computer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/13/2018-04-13-Raspberry-Pi-Re/" rel="next" title="Raspberry Pi. Re">
+                <i class="fa fa-chevron-left"></i> Raspberry Pi. Re
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/28/2018-04-28-PCB-Design-Debug/" rel="prev" title="PCB Design Debug">
+                PCB Design Debug <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Kaixin Yang (Cayson)" />
+            
+              <p class="site-author-name" itemprop="name">Kaixin Yang (Cayson)</p>
+              <p class="site-description motion-element" itemprop="description">I wish I could be your sunshine.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7Carchive">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I2C总线协议"><span class="nav-number">1.</span> <span class="nav-text">I2C总线协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SPI总线协议"><span class="nav-number">2.</span> <span class="nav-text">SPI总线协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UART总线协议"><span class="nav-number">3.</span> <span class="nav-text">UART总线协议</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kaixin Yang (Cayson)</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ykxs-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://sceneryinmirror.github.io/2018/04/22/2018-04-22-Bus-Protocol/';
+          this.page.identifier = '2018/04/22/2018-04-22-Bus-Protocol/';
+          this.page.title = 'Serial Bus Protocol';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ykxs-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
