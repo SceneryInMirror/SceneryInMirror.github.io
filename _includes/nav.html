@@ -30,10 +30,12 @@
             {% endif %}
         {% endif %}
 
-        {% if page.title != "tags" %}
-            <li class="item">
-                <a class="link" href="{{ site.url }}/tags">Tags</a>
-            </li>
+        {% if site.tags-page == true %}
+            {% if page.title != "tags" %}
+                <li class="item">
+                    <a class="link" href="{{ site.url }}/tags">Tags</a>
+                </li>
+            {% endif %}
         {% endif %}
         
         {% if site.resume == true %}

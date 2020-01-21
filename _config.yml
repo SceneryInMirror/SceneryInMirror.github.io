@@ -90,6 +90,7 @@ paginate_path: "blog/:num/"
 about: true
 blog: true
 #projects: true
+tags-page: true
 tags: true
 
 # do you want to show the "read time" of the posts?
