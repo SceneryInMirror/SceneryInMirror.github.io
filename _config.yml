@@ -24,7 +24,7 @@ baseurl: ""
 permalink: /:title/
 
 # To enable google analytics, supply your token below
-analytics-google: 'UA-156627543-1'
+analytics-google: UA-156627543-1
 
 # To enable piwik tracking, supply your url & site ID below
 # analytics-piwik-url: 'piwik.my-host.com'
