@@ -1,0 +1,128 @@
+---
+layout: post
+title: "PhxSQL"
+img: phxsql.jpg
+date: 2018-05-10 20:49:00
+category: blog
+author: ykx
+description: Try to compile, install and deploy PhxSQL.
+tag: [Learning, Computer, Database, Work]
+---
+
+PhxSQL是一个高可靠、强一致的MySQL集群，建立在Paxos和Percona的基础之上。
+
+PhxSQL的特性：
+
+1. 通过故障转移实现的高可靠性：当集群中超过一半的节点正常工作并且互联，整个集群就可以正常工作
+
+2. 集群节点数据一致性保证：通过用Paxos取代主从之间的低损耗半同步，PhxSQL确保主从之间的无损二进制日志(binlog)，并且支持可线性化的一致性，类似于Zookeeper的强一致
+
+3. 完全符合MySQL和MySQL客户端：PhxSQL支持可串行化的事务隔离级别
+
+4. 易于部署易于维护：PhxSQL，由内部实现的Paxos驱动，包括MySQL在内有4个组分，不依赖于zookeeper或其他etcd。PhxSQL支持自动集群成员热重配置
+
+### 部署
+
+0. 下载项目
+
+   > git clone https://github.com/Tencent/phxsql.git --recurse-submodule
+
+   readme教程极度不准确
+
+   可以参考的文档有：
+   
+   http://chuzhiyan.com/2016/09/01/%E5%AE%89%E8%A3%85-PhxSQL-%E7%AC%94%E8%AE%B0/
+   
+   https://zhuanlan.zhihu.com/p/24798993
+
+1. colib
+
+   make
+
+2. glog
+
+   ./configure CXXFLAGS=-fPIC --prefix=/home/ykx/Lab/phxsql/third_party/glog (即当前文件夹的绝对路径)
+
+   make && make install
+
+3. leveldb
+
+   make
+
+4. protobuf
+
+   解压gmock
+
+   ./autogen.sh
+
+   ./configure 同上
+
+   make && make install
+
+5. phxpaxos
+
+   ./autoinstall.sh
+
+   make && make install
+
+   如果不行就进入third_party里面挨个编译
+
+6. phxrpc
+
+   ./autoinstall.sh
+
+7. phxsql
+
+   在phxsql根目录下解压percona
+
+   ./autoinstall.sh
+
+   make && make install
+
+   等很久之后应该就可以了
+
+   这篇关于编译的文档写于2018.05.09，可能之后里面的各种三方模块有更新，导致编译操作有细微差别，但摸索几次应该就可以了
+
+### Install
+
+   这部分内容也不要相信官方文档...
+
+   可以参考的blog如下：
+
+   https://blog.csdn.net/yxx1173/article/details/53911824
+
+   按照这上面的教程来做基本没有问题
+
+----
+参考文献
+
+https://www.ibm.com/developerworks/cn/linux/l-cn-gpb/index.html
+
+https://blog.csdn.net/sky_qing/article/details/9707647
+
+https://blog.csdn.net/xiexievv/article/details/47396725
+
+http://djt.qq.com/article/view/1492
+
+https://news.cnblogs.com/n/552526/
+
+
+https://github.com/google/leveldb/tree/3080a45b626f8ddb474bc5e860796a48b51b3cf0
+
+https://github.com/google/glog/tree/0b0b022be1c9c9139955af578fe477529d4b7b3c
+
+https://github.com/Tencent/libco/tree/7e8d001a250018cff859db5f6f4a6edf4a38bc24
+
+https://github.com/Tencent/phxpaxos/blob/master/README.zh_CN.md
+
+https://github.com/Tencent/phxrpc/tree/a1b7ce5c5ae633bac3d9df85ee874a1e8a82d353
+
+https://blog.csdn.net/lqt641/article/details/73287231
+
+https://baike.baidu.com/item/GLOG/5786183?fr=aladdin
+
+https://baike.baidu.com/item/LevelDB
+
+https://baike.baidu.com/item/protocol%20buffer/1664400
+
+https://baike.baidu.com/item/Percona%20Server/3798821?fr=aladdin

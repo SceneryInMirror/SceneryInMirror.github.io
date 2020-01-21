@@ -1,0 +1,32 @@
+---
+title: "LaTeX -- I"
+layout: post
+date: 2019-05-04 00:00
+img: latex.jpg
+headerImage: True
+tag: [Computer, LaTeX, Learning]
+category: blog
+author: ykx
+description: When I wanted to draw the cover of 'PKU EECS UGR THSS', I have to find a way to draw underline which could change the line with words. Here is the solution.
+---
+
+Project Address：https://github.com/SceneryInMirror/PKU_EECS_UGR_THSS/tree/cover
+
+封面设计使用的是Coffins宏包，大致思路是将封面分成多个Coffin块，之后在每个Coffin块里添加内容。为了实现标题带有下划线并且能换行，可以使用以下的方法：
+
+~~~LaTeX
+\SetVerticalCoffin \chineseTitleText{110mm}{\parbox{112mm}{\bfseries\kaiti\zihao{2}{\uline{\chineseTitle}}}}
+\SetVerticalCoffin \englishTitleText{110mm}{\parbox{112mm}{\bfseries\kaiti\zihao{3}{\uline{\englishTitle}}}}
+~~~
+
+这里使用\parbox画了一个盒子，盒子限制了每行的长度，使用\uline添加下划线（\underline无法自动换行）。使用\hfill可以使得下划线延长至行尾。
+
+之后发现仍有bug，英文标题不能自动换行，还没有解决...
+
+### Ref
+
+LaTeX实现整行下划线：https://zhidao.baidu.com/question/503434135.html
+
+LaTeX实现指定宽度多行内容的下划线：http://blog.sina.com.cn/s/blog_a72b59cb0102xehl.html
+
+underline和uline的区别：https://blog.csdn.net/programchangesworld/article/details/51465154
