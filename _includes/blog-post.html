@@ -1,5 +1,5 @@
-<!--
-<div class="item {% if post.star %}star{% endif %}">
+<!--<div class="item {% if post.star %}star{% endif %}">-->
+<div class="kxpost"> 
     <a class="url" href="{{ site.url }}{{ post.url }}">
         <img class="post-title-image" src={{ "/assets/images/" | prepend: site.baseurl | append: post.img}}></img>
         <aside class="date"><time datetime="{{ post.date | date:"%d-%m-%Y" }}">{{ post.date | date: "%b %d %Y" }}</time></aside>
@@ -7,8 +7,9 @@
         <p>{{ post.description }}</p>
     </a>
 </div>
--->
 
+
+<!--
 <article class="kxpost">
     <img class="post-thumbnail" src={{"assets/images/" | prepend: site.baseurl | append: post.img}}></img>
     <div class="post-content">
@@ -17,3 +18,4 @@
         <span class="post-date">{{ post.date | date: "%b %d %Y" }}</span>
     </div>
 </article>
+-->
