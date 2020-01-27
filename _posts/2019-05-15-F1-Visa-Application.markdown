@@ -7,7 +7,7 @@ headerImage: True
 tag: Diary
 category: blog
 author: ykx
-description: This blog may help you know more about how to apply for an F-1 visa.
+description: This blog may help you know more about how to apply for F-1 visa.
 ---
 
 ### Flow
