@@ -3,7 +3,7 @@ title: "Summary of 2019"
 layout: post
 date: 2020-01-01 16:00
 updated: 2020-01-22 02:00
-img: snoopy.jpg
+img: santa_monica.jpg
 headerImage: True
 tag: [Diary]
 category: blog

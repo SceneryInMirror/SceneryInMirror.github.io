@@ -2,7 +2,7 @@
 title: "Wuhan, 2020 Lunar New Year"
 layout: post
 date: 2020-01-24 10:58
-img: snoopy.jpg
+img: winter.jpg
 headerImage: True
 tag: [Diary]
 category: blog

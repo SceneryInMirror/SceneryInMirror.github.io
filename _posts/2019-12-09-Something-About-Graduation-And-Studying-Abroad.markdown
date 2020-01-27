@@ -2,7 +2,7 @@
 title: "Something about Graduation and Studying Abroad"
 layout: post
 date: 2019-12-09 13:00
-img: snoopy.jpg
+img: USC.jpg
 headerImage: True
 tag: [Diary]
 category: blog
