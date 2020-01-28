@@ -1,18 +1,14 @@
 ---
 layout: page
 ---
-<!--
 {% if page.image and page.headerImage %}
     <img class="title-image" src={{ "/assets/images/" | prepend: site.baseurl | append: page.img}}>
 {% endif %}
--->
-
-<img class="title-image" src={{ "/assets/images/" | prepend: site.baseurl | append: page.img}}>
 <h1 class="title">{{ page.title }}</h1>
 
 <span class="date">
     <time datetime="{{ page.date | date:"%d-%m-%Y" }}">{{ page.date | date: "%A. %B %d, %Y" }}</time>
-    <!-- {% if site.read-time %} - {% include read-time.html %}{% endif %} -->
+    {% if site.read-time %} - {% include read-time.html %}{% endif %}
 </span>
 
 {% if site.show-tags %}
