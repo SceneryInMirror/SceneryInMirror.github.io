@@ -2,7 +2,7 @@
 title: "Some Useful Formula"
 layout: post
 date: 2020-02-18 00:00
-img: snoopy.jpg
+img: formula.jpg
 headerImage: True
 tag: [Learning]
 category: blog

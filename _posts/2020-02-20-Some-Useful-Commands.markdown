@@ -2,7 +2,7 @@
 title: "Some Useful Commands"
 layout: post
 date: 2020-02-20 19:00
-img: linux.jpg
+img: linux.png
 headerImage: True
 tag: [Linux, Learning]
 category: blog
