@@ -10,6 +10,9 @@ layout: compress
 
 # Conferences
 
+<div id="Conference_1282" align=center x:publishsource="Excel">
+
+<!doctype>
 
 <table border=0 cellpadding=0 cellspacing=0 width=1899 style='border-collapse:
  collapse;table-layout:fixed;width:1426pt'>
@@ -433,6 +436,9 @@ layout: compress
  </tr>
  <![endif]>
 </table>
+
+</div>
+
 
 <br>
 <br>
