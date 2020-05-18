@@ -13,9 +13,15 @@ picture: assets/images/profile.jpg
 
 # If you want to include your resume, set to true
 # and specify source (external or local).
-resume: true
-resume-external: true
+resume: false
+resume-external: false
 resume-url: http://SceneryInMirror.github.io/assets/Resume - Kaixin Yang.pdf 
+
+# If you want to include your CV, set to true
+# and specify source (external or local).
+cv: true
+cv-external: true
+cv-url: http://SceneryInMirror.github.io/assets/CV - Kaixin Yang.pdf 
 
 #url: https://koppl.in/indigo
 url: "https://sceneryinmirror.github.io"
@@ -92,6 +98,7 @@ blog: true
 #projects: true
 tags-page: true
 tags: true
+research: true
 
 # do you want to show the "read time" of the posts?
 read-time: true
