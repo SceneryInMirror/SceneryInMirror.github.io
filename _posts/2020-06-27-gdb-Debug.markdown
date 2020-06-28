@@ -2,7 +2,7 @@
 title: "gdb Debug"
 layout: post
 date: 2020-06-28 00:00
-img: vim.jpg
+img: gdb.png
 headerImage: True
 tag: [Linux, Learning]
 category: blog
