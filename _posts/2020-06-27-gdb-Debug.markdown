@@ -1,0 +1,40 @@
+---
+title: "gdb Debug"
+layout: post
+date: 2020-06-28 00:00
+img: vim.jpg
+headerImage: True
+tag: [Linux, Learning]
+category: blog
+author: ykx
+description: gdb debug tool used in Linux.
+---
+
+## Ref
+
+[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html)
+
+[https://www.cnblogs.com/rosesmall/archive/2012/04/10/2440514.html](https://www.cnblogs.com/rosesmall/archive/2012/04/10/2440514.html)
+
+[https://cs.baylor.edu/~donahoo/tools/gdb/tutorial.html](https://cs.baylor.edu/~donahoo/tools/gdb/tutorial.html)
+
+## Starting gdb
+
+1. When compiling, add '-g' option: g++ -g hello.cpp -o hello
+
+2. gdb hello
+
+## Setting arguments
+
+1. (gdb) set args [arguments]
+
+   eg: (gdb) set args -v test.v
+
+## Commands
+
+1. run (r): run the program
+2. next (n): next line
+3. break n (b n): set break point in line n
+4. break function (b function): set break point in the entrance of the function
+5. list (l): show the source code
+6. print expression: print the value of the expression
