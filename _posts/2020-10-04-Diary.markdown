@@ -1,0 +1,17 @@
+---
+title: "diary"
+layout: post
+date: 2020-10-04 15:00
+img: snoopy.png
+headerImage: True
+tag: [Diary]
+category: blog
+author: ykx
+description: Ph.D. life in LA.
+---
+
+###### 10/04/2020 14:48
+
+最近越来越颓废了，糟糕的日子真的是没有底线的...每天醒来都很down，没有能分享的人，也不想四处传播不好的情绪...和自己内耗太消耗精力了，要花好多好多时间在无意义的事情上，让自己能短暂地快乐一下...完全失控的感觉，最可怕的是不相信能靠自己变好起来，已经让自己失望太多太多太多次了...
+
+###### 

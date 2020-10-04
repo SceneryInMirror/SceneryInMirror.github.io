@@ -1,5 +1,5 @@
 ---
-title: "gdb Debug"
+title: "Debug Tools"
 layout: post
 date: 2020-06-28 00:00
 img: gdb.png
@@ -7,8 +7,10 @@ headerImage: True
 tag: [Linux, Learning]
 category: blog
 author: ykx
-description: gdb debug tool used in Linux.
+description: GDB debug tool used in Linux. PDB added (10/04/2020).
 ---
+
+# GDB
 
 ## Ref
 
@@ -38,3 +40,7 @@ description: gdb debug tool used in Linux.
 4. break function (b function): set break point in the entrance of the function
 5. list (l): show the source code
 6. print expression: print the value of the expression
+
+
+
+# PDB
