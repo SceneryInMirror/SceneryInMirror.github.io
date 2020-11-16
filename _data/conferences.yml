@@ -1,8 +1,8 @@
 ---
 # Security and Privacy
-- name: S&P (Oakland)
+- name: S&P
   year: 2021
-  date: "May 23 – 27 2021"
+  date: "May 23–27, 2021"
   description: IEEE Symposium on Security and Privacy
   link: https://www.ieee-security.org/TC/SP2021/
   deadline:
@@ -10,17 +10,17 @@
     - "2020-06-04 23:59"
     - "2020-09-03 23:59"
     - "2020-12-03 23:59"
-  place: San Francisco, California, USA
+  place: Virtual
   tags: [SEC, PRIV]
 
 - name: Euro S&P
   description: IEEE European Symposium on Security and Privacy
-  year: 2020
-  link: https://www.ieee-security.org/TC/EuroSP2020/
-  deadline: "2019-11-20 23:59"
-  comment: Voluntary Abstract Registration until 2019-10-22
-  date: "June 16 - June 18"
-  place: Genova, Italy
+  year: 2021
+  date: "September 7-11, 2021"
+  link: https://www.ieee-security.org/TC/EuroSP2021/
+  deadline: "2020-11-05 23:59"
+  comment: 
+  place: Vienna, Austria
   tags: [SEC, PRIV]
 
 - name: CCS
@@ -28,11 +28,11 @@
   year: 2020
   link: https://www.sigsac.org/ccs/CCS2020/
   deadline:
-    - "%y-01-20 23:59"
-    - "%y-05-04 23:59"
+    - "2020-01-20 23:59"
+    - "2020-05-04 23:59"
   comment: 2 review cycles
-  date: "November 9-13"
-  place: Orlando, FL, USA
+  date: "November 9-13, 2020"
+  place: Virtual
   tags: [SEC, PRIV]
 
 - name: AsiaCCS
@@ -42,44 +42,21 @@
   deadline:
     - "2020-08-21 23:59"
     - "2020-12-11 23:59"
-  date: "June 7- June 11"
+  date: "June 7-11, 2021"
   place: Hong Kong, China
   tags: [SEC, PRIV]
-  timezone: "Etc/GMT+12"
-
+ 
 - name: Usenix
   description: Usenix Security Symposium
   year: 2021
   link: https://www.usenix.org/conference/usenixsecurity21
   deadline:
     - "2020-06-18 23:59"
-    - "%y-06-11 23:59"
-    - "%y-10-15 23:59"
-    - "%y-02-04 23:59"
+    - "2020-10-15 23:59"
+    - "2021-02-04 23:59"
   comment: Rolling deadline every four months.
-  date: "August 11-13"
-  place: Vancouver, BC, Canada.
-  tags: [SEC, PRIV]
-
-- name: NDSS
-  description: ISOC Network and Distributed System Security Symposium
-  year: 2021
-  link: https://www.ndss-symposium.org/ndss-2021/
-  deadline:
-    - "%y-04-30 23:59"
-    - "%y-07-31 23:59"
-  date: February 21-24
-  place: San Diego, CA, USA
-  tags: SEC
-
-- name: ESORICS
-  description: European Symposium on Research in Computer Security
-  year: 2020
-  link: http://esorics2020.sccs.surrey.ac.uk
-  deadline: "2020-04-24 23:59"
-  comment: Title and abstract deadline on April 17
-  date: September 23-27
-  place: Surrey, UK
+  date: "August 11-13, 2021"
+  place: Vancouver, B.C., Canada
   tags: [SEC, PRIV]
 
 - name: WiSec
@@ -87,47 +64,13 @@
   year: 2020
   link: https://wisec2020.ins.jku.at/
   deadline: "2020-03-13 23:59"
-  date: July 8-10
-  place: Linz, Austria
+  date: July 8-10, 2020
+  place: Virtual
   tags: [SEC, PRIV]
 
-- name: SOUPS
-  description: Usenix Symposium on Usable Security and Privacy
-  year: 2020
-  link: https://www.usenix.org/conference/soups2020
-  deadline: "2020-02-20 23:59"
-  comment: Collocated with Usenix Security
-  date: August 9–11
-  place: Boston, MA, USA
-  tags: [SEC, PRIV]
 
 # Privacy
 
-- name: WPES
-  description: Workshop on Privacy in the Electronic Society
-  year: 2020
-  link: https://www.wpes.tech/2020/
-  deadline: "2020-07-23 23:59"
-  comment: Collocated with ACM CCS
-  date: "November 9"
-  place: Orlando, USA
-  timezone: Etc/GMT+11
-  tags: [PRIV]
-
-- name: PETS
-  description: Privacy Enhancing Technologies Symposium
-  year: 2020
-  link: https://petsymposium.org
-  deadline:
-    - "%y-05-31 23:59"
-    - "%y-08-31 23:59"
-    - "%y-11-30 23:59"
-    - "%y-02-28 23:59"
-  comment: Rolling deadline every quarter
-  timezone: Etc/GMT+11
-  date: July 14-18
-  place: Montréal, Canada
-  tags: PRIV
 
 # Crypto
 
@@ -135,93 +78,54 @@
   description: International Cryptology Conference
   year: 2020
   link: https://crypto.iacr.org/2020
-  deadline: "2020-02-11 16:00"
-  timezone: Etc/GMT+5
-  date: August 16-20
-  place: Santa Barbara, CA, USA
+  deadline: "2020-02-11 21:00"
+  timezone: UTC
+  date: August 17-21, 0202
+  place: Virtual
   tags: CRYPTO
 
 - name: Eurocrypt
   description: European Cryptology Conference
-  year: 2020
-  link: https://eurocrypt.iacr.org/2020/
-  deadline: "2019-09-26 11:59"
-  timezone: Europe/Zurich
-  date: May 10 - May 14
+  year: 2021
+  link: https://eurocrypt.iacr.org/2021/
+  deadline: "2020-10-08 21:00"
+  timezone: UTC
+  date: May 2-6, 2021
   place: Zagreb, Croatia
   tags: CRYPTO
 
 - name: Asiacrypt
   description: International Conference on the Theory and Application of Cryptology and Information Security
-  year: 2019
-  link: https://asiacrypt.iacr.org/2019
-  deadline: "2019-05-14 05:00"
-  timezone: Etc/UTC
-  date: December 8-12
-  place: Kobe, Japan
-  tags: CRYPTO
-
-- name: FC
-  description: Financial Cryptography and Data Security
   year: 2020
-  link: http://fc20.ifca.ai/
-  deadline: "2019-09-23 23:59"
-  timezone: Etc/GMT+11
-  date: "Feb 10 - 14"
-  place: Kota Kinabalu, Sabah, Malaysia
+  link: https://asiacrypt.iacr.org/2020
+  deadline: "2020-05-22 05:00"
+  timezone: UTC
+  date: December 7-11, 2020
+  place: Virtual
   tags: CRYPTO
-
-- name: AFT
-  description: ACM Conference on Advances in Financial Technologies
-  year: 2020
-  link: https://aft.acm.org/
-  deadline: "2020-06-04 23:59"
-  date: "Oct 21 – 23"
-  place: New York City, USA
-  tags: [SEC, PRIV, CRYPTO]
 
 - name: TCC
   description: Theory of Cryptography Conference
   year: 2020
-  link: https://www.iacr.org/workshops/tcc
-  deadline: TBA
-  date: November
-  place: Durham, NC, USA
+  link: https://tcc.iacr.org/2020/
+  deadline: "2020-05-26 22:59"
+  timezone: UTC
+  date: November 16-19, 2020
+  place: Virtual
   tags: CRYPTO
 
 - name: CSF
   description: IEEE Computer Security Foundations Symposium
-  year: 2020
-  link: https://www.ieee-security.org/TC/CSF2020/
+  year: 2021
+  link: https://www.ieee-security.org/TC/CSF2021/
   deadline:
-    - "%y-02-07 23:59"
-    - "%y-04-17 23:59"
-    - "%y-10-04 23:59"
-    - "%y-12-13 23:59"
-  comment: Rolling deadline every quarter
-  date: June 22-26
-  place: Boston, MA, USA
+    - "2020-05-08 23:59"
+    - "2020-10-02 23:59"
+    - "Early Feburary, 2021"
+  comment: 
+  date: June 21-25, 2021
+  place: Dubrovnik, Croatia
   tags: [SEC, PRIV]
-
-- name: PKC
-  description: International Conference on Practice and Theory of Public Key Cryptography
-  year: 2020
-  link: https://pkc.iacr.org/2020/
-  deadline: "2019-11-02 09:59"
-  timezone: Etc/UTC
-  date: May 4-7
-  place: Edinburgh, Scotland, UK
-  tags: CRYPTO
-
-- name: CT-RSA
-  description: RSA Conference Cryptographers’ Track
-  year: 2020
-  link: https://sites.google.com/view/ctrsa2020/home
-  deadline: "2019-09-20 23:59"
-  timezone: Etc/GMT+5
-  date: February 24-28
-  place: San Francisco, CA, USA
-  tags: CRYPTO
 
 - name: TCHES
   description: IACR Transactions on Cryptographic Hardware and Embedded Systems
@@ -233,84 +137,10 @@
     - "%y-01-15 23:59"
     - "%y-04-15 23:59"
   comment: Rolling deadline every quarter
-  date: August 25-28
-  place: Atlanta, US
+  date: September 12-15, 2021
+  place: Beijing, China
   tags: [SEC, CRYPTO]
 
 # Networks and systems, applications
 
-- name: RAID
-  description: International Symposium on Research in Attacks, Intrusions and Defenses
-  year: 2020
-  link: https://www.raid2020.org/
-  deadline: "2020-04-07 23:59"
-  date: October 14-16
-  place: Donostia/San Sebastian, Spain
-  tags: SEC
 
-- name: ACSAC
-  description: Annual Computer Security Applications Conference
-  year: 2020
-  link: https://www.acsac.org/2020/
-  deadline: "2020-06-12 23:59"
-  date: Dec 7-11
-  place: Austin, TX, USA
-  tags: [SEC]
-
-- name: IMC
-  description: Internet Measurement Conference
-  year: 2020
-  link: https://conferences.sigcomm.org/imc/2020/
-  deadline: "2020-05-26 23:59"
-  comment: Title and abstract deadline on May 19th
-  timezone: America/Los_Angeles
-  date: October 27-29
-  place: Pittsburgh, PA, USA
-  tags: SEC
-
-- name: DSN
-  description: The International Conference on Dependable Systems and Networks
-  year: 2020
-  link: https://dsn2020.webs.upv.es/
-  deadline: "2019-12-03 23:59"
-  date: June 29 - July 2
-  place: Valencia, Spain
-  tags: SEC
-
-- name: ACNS
-  description: International Conference on Applied Cryptography and Network Security
-  year: 2020
-  link: https://sites.google.com/di.uniroma1.it/ACNS2020
-  deadline: "2020-01-20 23:59"
-  date: June 22-25
-  place: Rome, Italy
-  tags: [CRYPTO, SEC]
-
-- name: SecDev
-  year: 2020
-  description: IEEE Secure Development Conference
-  link: https://secdev.ieee.org/
-  deadline: "2020-05-25 23:59"
-  date: "September 18-30"
-  place: Atlanta, GA, USA
-  tags: [SEC, PRIV]
-
-- name: ISC
-  description: The Information Security Conference
-  year: 2020
-  link: https://isc2020.petra.ac.id/
-  deadline: "2020-05-28 23:59"
-  timezone: Etc/UTC
-  date: "September 16-18"
-  place: New York, USA
-  tags: [SEC, INFOR]
-
-- name: CVCBT
-  description: CryptoValley Conference on Blockchain Technologies
-  year: 2020
-  link: http://www.cryptovalleyconference.com/technology-call-for-papers
-  deadline: "2020-04-03 16:00"
-  timezone: Europe/Zurich
-  date: "June 24-26"
-  place: Rotkreuz, Switzerland
-  tags: [SEC, PRIV, CRYPTO]
