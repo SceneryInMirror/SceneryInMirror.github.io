@@ -149,8 +149,7 @@
   description: The Design Automation Conference
   year: 2021
   link: https://www.dac.com/
-  deadline:
-    - "2020-11-16 17:00"
+  deadline: "2020-11-16 17:00"
   timezone: PST
   date: July 11-15, 2021
   place: San Francisco, USA
