@@ -1,9 +1,18 @@
 ---
+---
 - name: Security
-  tag: SEC
+  tag: SECURITY
 - name: Privacy
-  tag: PRIV
-- name: Crypto
+  tag: PRIVACY
+- name: Cryptography
   tag: CRYPTO
 - name: Design
   tag: DESIGN
+- name: Formal Method
+  tag: FORMAL
+- name: CPS
+  tag: CPS
+- name: Machine Learning
+  tag: ML
+-name: Test
+  tag: TEST
