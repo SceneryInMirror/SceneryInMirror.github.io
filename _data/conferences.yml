@@ -74,7 +74,7 @@
   year: 2021
   link: https://www.dac.com/
   deadline: "2020-11-16 17:00"
-  timezone: UTC-8
+  timezone: Etc/GMT+8
   date: July 11-15, 2021
   place: San Francisco, USA
   tags: [SECURITY, DESIGN]
