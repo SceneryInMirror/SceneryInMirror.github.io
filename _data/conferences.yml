@@ -108,13 +108,14 @@
   tags: [SECURITY, PRIVACY]
 
 - name: ICCAD
-  description: International Conference on Control, Automation and Diagnosis
-  year: 2021
-  date: July 5-7, 2021
-  link: http://www.iccad-conf.com/
-  deadline: "2021-01-31 23:59"
-  place: Grenoble, France
-  tags: [CONTROL, AUTOMATION, DIAGNOSIS]
+  description: International Conference On Computer Aided Design
+  year: 2020
+  date: November 2-5, 2020
+  link: https://iccad.com/
+  deadline: "2020-05-28 17:00"
+  timezone: Etc/GMT+7
+  place: Virtual
+  tags: [DESIGN, CPS, TEST, SECURITY]
 
 - name: MEMOCODE
   description: ACM-IEEE International Conference on Formal Methods and Models for System Design

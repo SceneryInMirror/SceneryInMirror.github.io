@@ -15,9 +15,3 @@
   tag: ML
 - name: Test
   tag: TEST
-- name: Control
-  tag: CONTROL
-- name: Diagnosis
-  tag: DIAGNOSIS
-- name: Automation
-  tag: AUTOMATION
