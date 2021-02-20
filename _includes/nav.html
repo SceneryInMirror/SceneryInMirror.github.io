@@ -1,4 +1,5 @@
-<nav class="{% if page.title == "Home" %}nav-home{% else %}nav{% endif %}">
+<!--<nav class="{% if page.title == "Home" %}nav-home{% else %}nav{% endif %}">-->
+<nav class="nav">
     <ul class="list">
         {% if page.title != "Home" %}
             <li class="item">
@@ -54,7 +55,7 @@
 
         {% if site.cv == true %}
             <li class="item">
-                <a class="link" href="{% if site.cv-external %}{{ site.cv-url }}{% else %}{{ site.url }}/{{ site.cv-url }}{% endif %}">Curriculum Vitae</a>
+                <a class="link" href="{% if site.cv-external %}{{ site.cv-url }}{% else %}{{ site.url }}/{{ site.cv-url }}{% endif %}">CV</a>
             </li>
         {% endif %}
 

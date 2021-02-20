@@ -2,7 +2,8 @@
 layout: compress
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
 <head>
 
     {% if site.analytics-google %}
@@ -10,27 +11,31 @@ layout: compress
     {% endif %}
 
     <meta charset="utf-8">
-    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
-    <meta name=viewport content="width=device-width, initial-scale=1">
-
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">  <!-- make IE8 compatible -->
+    <meta name=viewport content="width=device-width, initial-scale=1">  <!-- better view from mobile termination -->
     <meta name=description content="{{ site.bio }}">
     <meta name=author content="{{ site.name }}">
-    <meta property="og:image" content="{{ site.url }}/{{ site.picture }}">
+    <meta property="og:title" content="Kaixin Yang's website">  <!-- og is OpenGraph Protocol -->
+    <meta property="og:image" content="{{ site.url }}/{{ site.picture }}">  <!-- og facilitates citation on the Internet -->
     <meta property="og:type" content="profile">
 
-    {% seo %}
+    {% seo %}  <!-- seo optimization -->
     
-    {% include favicon.html %}
+    {% include favicon.html %}  <!-- favorite icon, or website icon -->
 
     <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html','' }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.url }}{{ "/feed.xml" }}" />
 
+    <!-- capture assigns the variable with the content -->
+    <!-- include copies and pastes the file under _includes folder -->
+    <!-- scssify converts scss to css -->
     <style>
     {% capture scss_sheet %}{% include style.scss %}{% endcapture %}
     {{ scss_sheet | scssify }}
     </style>
 
 </head>
+
 <body>
 
     <div class="wrapper-{% if site.width == "normal" %}normal{% elsif site.width == "large" %}large{% endif %}">
@@ -44,11 +49,12 @@ layout: compress
             {% endif %}
         {% endif %}
 
-            {{ content }}
+        {{ content }}
         </div>
     </div>
 
     {% include icons.html %}
 
 </body>
+
 </html>

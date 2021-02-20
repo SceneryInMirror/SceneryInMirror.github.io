@@ -1,15 +1,17 @@
-# main text of home
+# basic configuration
 name: Kaixin Yang
-bio: I wish I could be your sunshine.
-
-# twitter summary info
-#description: A blog about technology and stuff related
+bio: Second year Ph.D. student in DesCyPhy Lab at USC
 description: Kaixin's Garden
+url: "https://sceneryinmirror.github.io"
+baseurl: ""
+permalink: /:title/
+
 
 # if it's an external image, update below for true
 # better with square images
 external-image: false
 picture: assets/images/profile.jpg
+
 
 # If you want to include your resume, set to true
 # and specify source (external or local).
@@ -17,35 +19,29 @@ resume: false
 resume-external: false
 resume-url: http://SceneryInMirror.github.io/assets/Resume - Kaixin Yang.pdf 
 
+
 # If you want to include your CV, set to true
 # and specify source (external or local).
 cv: true
 cv-external: true
 cv-url: http://SceneryInMirror.github.io/assets/CV - Kaixin Yang.pdf 
 
-#url: https://koppl.in/indigo
-url: "https://sceneryinmirror.github.io"
-baseurl: ""
-
-permalink: /:title/
 
 # To enable google analytics, supply your token below
 analytics-google: UA-156627543-1
 
-# To enable piwik tracking, supply your url & site ID below
-# analytics-piwik-url: 'piwik.my-host.com'
-# analytics-piwik-id: 1
 
 # if you don't want comments in your posts, leave categories empty
 disqus:
   shortname: ykxs-blog # enter this from your disqus account
   categories: [blog] # [blog, project] # only show disqus for posts that have these categories
 
+
 # if you don't have any of social below, comment the line
-facebook: profile.php?id=100012146822426
-twitter: Kaixin_Yang_LA
+#facebook: profile.php?id=100012146822426
+#twitter: Kaixin_Yang_LA
 # google: mygoogle
-instagram: kaixin_at_la
+instagram: cashinyang
 # pinterest: mypinterest
 linkedin: kaixin-yang-a27287162
 # youtube: myyoutube
@@ -61,29 +57,24 @@ github: SceneryInMirror
 # lanyrd: mylanyrd
 email: kaixinya@usc.edu
 
+
+# To enable piwik tracking, supply your url & site ID below
+# analytics-piwik-url: 'piwik.my-host.com'
+# analytics-piwik-id: 1
+
+
 authors:
     ykx:
         name: Kaixin Yang
-        bio: I wish I could be the sunshine for you.
+        bio: Keep on going.
         external-image: false
         picture: assets/images/profile.jpg
-#johndoe:
-        #name: John Doe
-        #bio: A Man who travels the world eating noodles
-        #external-image: false
-        #picture: assets/images/profile.jpg
-        #twitter: johndoe
-#jamesfoster:
-#       name: James Foster
-#       bio: A Man who develops software with coffee
-#       external-image: false
-#       picture: assets/images/james.jpg
-#       twitter: jamesfoster
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
 # normal = 560px / large = 810px
 width: large
+
 
 # if you don't need pagination, comment the *paginate* configs below
 paginate: 10
@@ -93,11 +84,11 @@ paginate_path: "blog/:num/"
 #projects: true
 
 # if you don't need "about" or "blog", comment them out below
-about: true
+#about: true
 blog: true
 #projects: true
-tags-page: true
-tags: true
+#tags-page: true
+#tags: true
 research: true
 
 # do you want to show the "read time" of the posts?
@@ -135,6 +126,7 @@ compress_html:
         - stage
 
 exclude: ["travis.sh", "Rakefile", "README.md", "Gemfile", "Gemfile.lock", "FAQ.md"]
+
 
 friends: [
         {
