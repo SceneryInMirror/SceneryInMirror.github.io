@@ -131,18 +131,18 @@
   year: 2021
   date: December 5-8, 2021
   link: http://www.hostsymposium.org/call-for-paper.php
-  deadline: "2020-04-01 23:59"
+  deadline: "2021-05-04 23:59"
   place: Washington DC, USA
   tags: [CPS, SECURITY]
 
 - name: ICCAD
   description: International Conference On Computer Aided Design
-  year: 2020
+  year: 2021
   date: November 2-5, 2020
   link: https://iccad.com/
-  deadline: "2020-05-28 17:00"
+  deadline: "2021-05-28 17:00"
   timezone: Etc/GMT+7
-  place: Virtual
+  place: Hilton Munich Park, Munich
   tags: [DESIGN, CPS, TEST, SECURITY]
 
 - name: ISCAS
@@ -154,6 +154,15 @@
   timezone: Etc/GMT+7
   place: Daegu, South Korea (Hybrid)
   tags: [CPS, ML]
+
+- name: ITC
+  description: International Test Conference
+  year: 2021
+  date: October 10-15, 2021
+  link: http://www.itctestweek.org/
+  deadline: "March 19, 2021"
+  place: Unknown
+  tags: [TEST, DESIGN, SECURITY]
 
 - name: MEMOCODE
   description: ACM-IEEE International Conference on Formal Methods and Models for System Design

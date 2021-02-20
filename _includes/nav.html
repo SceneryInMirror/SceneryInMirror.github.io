@@ -1,5 +1,11 @@
 <!--<nav class="{% if page.title == "Home" %}nav-home{% else %}nav{% endif %}">-->
 <nav class="nav">
+<div class="container">	
+    <div class="left">
+        <a class="link" href="{{ site.url }}">KAIXIN YANG</a>
+    </div>
+
+    <div class="right">
     <ul class="list">
         {% if page.title != "Home" %}
             <li class="item">
@@ -60,4 +66,6 @@
         {% endif %}
 
     </ul>
+    </div>
+</div>
 </nav>
