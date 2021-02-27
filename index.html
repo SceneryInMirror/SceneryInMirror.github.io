@@ -5,7 +5,14 @@ title: Home
 
 <br/>
 <p>
-Hi, I am 杨凯欣 (Kaixin Yang, pronounced as Cashin Young), a second year Ph.D. student in <a href="https://descyphy.usc.edu/">DesCyPhy Lab</a> at USC, advised by <a href="https://viterbi.usc.edu/directory/faculty/Nuzzo/Pierluigi">Prof. Pierluigi Nuzzo</a>.
+Hi, welcome to my blog! I am 杨凯欣 (Kaixin Yang, pronounced as Cashin Young), a second year Ph.D. student in <a href="https://descyphy.usc.edu/">DesCyPhy Lab</a> at USC, advised by <a href="https://viterbi.usc.edu/directory/faculty/Nuzzo/Pierluigi">Prof. Pierluigi Nuzzo</a>.
+</p>
+
+<p>
+And also welcome to my friends' blogs: 
+{% for friend in site.friends %}
+<a href="{{friend.href}}">{{friend.title}}</a> 
+{% endfor %}
 </p>
 
 <!--
