@@ -2,9 +2,11 @@
 ---
 $(function() {
   deadlineByConf = {};
+  abstractDeadlineByConf = {};
 
   {% for conf in site.data.conferences %}
   {% assign conf_id = conf.name | append: conf.year | slugify %}
+
   {% if conf.deadline == "TBA" %}
   $('#{{ conf_id }} .timer').html("TBA");
   $('#{{ conf_id }} .deadline-time').html("TBA");
@@ -78,6 +80,81 @@ $(function() {
     deadlineByConf["{{ conf_id }}"] = confDeadline;
   }
   {% endif %}
+
+  {% if conf.abstract_deadline == "TBA" %}
+  $('#{{ conf_id }} .abstract-timer').html("TBA");
+  $('#{{ conf_id }} .abstract-deadline-time').html("TBA");
+  abstractDeadlineByConf["{{ conf_id }}"] = null;
+
+  {% else %}
+  var rawDeadlines = {{ conf.abstract_deadline | jsonify }} || [];
+  if (rawDeadlines.constructor !== Array) {
+    rawDeadlines = [rawDeadlines];
+  }
+  var parsedDeadlines = [];
+  while (rawDeadlines.length > 0) {
+    var rawDeadline = rawDeadlines.pop();
+    // check if date is template
+    if (rawDeadline.indexOf('%m') >= 0) {
+      for (var m = 1; m <= 12; m++) {
+        rawDeadlines.push(rawDeadline.replace('%m', m < 10 ? '0' + m : m));
+      }
+    } else if (rawDeadline.indexOf('%y') >= 0) {
+      year = parseInt(moment().year());
+      rawDeadlines.push(rawDeadline.replace('%y', year));
+      rawDeadlines.push(rawDeadline.replace('%y', year + 1));
+
+    } else {
+      // adjust date according to deadline timezone
+      {% if conf.timezone %}
+      var deadline = moment.tz(rawDeadline, "{{ conf.timezone }}");
+      {% else %}
+      var deadline = moment.tz(rawDeadline, "Etc/GMT+12"); // Anywhere on Earth
+      {% endif %}
+
+      // post-process date
+      if (deadline.minutes() === 0) {
+        deadline.subtract(1, 'seconds');
+      }
+      if (deadline.minutes() === 59) {
+        deadline.seconds(59);
+      }
+      parsedDeadlines.push(deadline);
+    }
+  }
+
+  // check which deadline is closest
+  var confDeadline = parsedDeadlines[0];
+  var today = moment();
+  for (var i = 1; i < parsedDeadlines.length; i++) {
+    deadlineCandidate = parsedDeadlines[i];
+    if ((today.diff(deadlineCandidate) < 0 && today.diff(deadlineCandidate) > today.diff(confDeadline))) {
+      confDeadline = deadlineCandidate;
+    }
+  }
+
+  // render countdown timer
+  if (confDeadline) {
+    function make_update_countdown_fn(confDeadline) {
+      return function(event) {
+        diff = moment() - confDeadline
+        if (diff <= 0) {
+           $(this).html(event.strftime('%D days %Hh %Mm %Ss'));
+        } else {
+          $(this).html(confDeadline.fromNow());
+        }
+      }
+    }
+    $('#{{ conf_id }} .abstract-timer').countdown(confDeadline.toDate(), make_update_countdown_fn(confDeadline));
+    // check if date has passed, add 'past' class to it
+    //if (moment() - confDeadline > 0) {
+    //  $('#{{ conf_id }}').addClass('past');
+    //}
+    $('#{{ conf_id }} .abstract-deadline-time').html(confDeadline.local().format('D MMM YYYY, h:mm:ss a'));
+    abstractDeadlineByConf["{{ conf_id }}"] = confDeadline;
+  }
+  {% endif %}
+
   {% endfor %}
 
   // Reorder list

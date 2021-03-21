@@ -79,7 +79,7 @@ a:hover, a:focus {
   opacity: 0.5;
 }
 
-.timer {
+.timer, .abstract-timer {
   font-size: 1.5em;
   line-height: 1.25em;
 }

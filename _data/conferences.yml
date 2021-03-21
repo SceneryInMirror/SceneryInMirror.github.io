@@ -160,7 +160,8 @@
   year: 2021
   date: October 10-15, 2021
   link: http://www.itctestweek.org/
-  deadline: "March 19, 2021"
+  abstract_deadline: "April 16, 2021"
+  deadline: "April 23, 2021"
   place: Unknown
   tags: [TEST, DESIGN, SECURITY]
 
@@ -195,7 +196,7 @@
   date: November 16-19, 2020
   place: Virtual
   tags: CRYPTO
- 
+
 - name: Usenix
   description: Usenix Security Symposium
   year: 2021
@@ -236,6 +237,3 @@
   date: April 25-28, 2021
   place: Virtual
   tags: [SECURITY, DESIGN]
-  
-
-
