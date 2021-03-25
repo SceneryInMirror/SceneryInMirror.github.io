@@ -187,10 +187,11 @@ $(function() {
       return +1;
     }
     if (diff1 < 0 && diff2 < 0) {
-      return -1 ? diff1 < diff2 : +1;
+      //return -1 ? diff1 < diff2 : +1;
+      return diff1 < diff2 ? +1 : -1;
     }
     if (diff1 > 0 && diff2 > 0) {
-      return -1 ? a < b : +1;
+      return diff1 < diff2 ? +1 : -1;
     }
   });
   $('.conf-container').append(confs);
