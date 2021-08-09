@@ -12,35 +12,53 @@ description: GDB debug tool used in Linux. PDB added (10/04/2020).
 
 # GDB
 
-## Ref
+> Ref:
+> [Linux Tools Quick Tutorial](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html)
+> [GDB Debug Using Args](https://www.cnblogs.com/rosesmall/archive/2012/04/10/2440514.html)
+> [How to Debug Using GDB](https://cs.baylor.edu/~donahoo/tools/gdb/tutorial.html)
 
-[https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html](https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/gdb.html)
-
-[https://www.cnblogs.com/rosesmall/archive/2012/04/10/2440514.html](https://www.cnblogs.com/rosesmall/archive/2012/04/10/2440514.html)
-
-[https://cs.baylor.edu/~donahoo/tools/gdb/tutorial.html](https://cs.baylor.edu/~donahoo/tools/gdb/tutorial.html)
-
-## Starting gdb
+### Start GDB
 
 1. When compiling, add '-g' option: g++ -g hello.cpp -o hello
 
 2. gdb hello
 
-## Setting arguments
+### Arguments
 
 1. (gdb) set args [arguments]
-
    eg: (gdb) set args -v test.v
 
-## Commands
+### Commands
 
-1. run (r): run the program
-2. next (n): next line
-3. break n (b n): set break point in line n
-4. break function (b function): set break point in the entrance of the function
-5. list (l): show the source code
-6. print expression: print the value of the expression
+1. run ( r ): run the program
+2. continue ( c ): continue the debug
+3. next ( n ): execute next line
+4. step: step into a function
+5. break [n] ( b [n] ): set breakpoint in line n
+6. break [function] ( b [function] ): set breakpoint in the entrance of the function
+7. break [file]:[n] ( b [file]:[n] ): set breakpoint in line n of the specified file 
+8. info breakpoints: list information of all breakpoints
+9. disable [n]: disable break point n
+10. list ( l ): show the source code
+11. print [expression] ( p [expression] ): print the value of the expression
+
 
 
 
 # PDB
+
+> ref:
+> [pdb - The Python Debugger](https://docs.python.org/3.2/library/pdb.html)
+
+### Start PDB
+
+python -m pdb demo.py
+
+### Commands
+
+1. next ( n ): execute next line
+2. print ( p ): print the variable values
+3. list ( l ): show the source code
+4. step ( s ): step into a function
+5. continue ( c ): continue the debug
+6. break [n] ( b [n] ): set breakpoint in line n

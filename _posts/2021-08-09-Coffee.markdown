@@ -1,0 +1,22 @@
+---
+title: "Coffee Flavor"
+layout: post
+date: 2021-08-09 14:00
+img: coffee.jpg
+headerImage: True
+tag: [Learning]
+category: blog
+author: ykx
+description: Comments on all kinds of coffee I have ever tried.
+---
+
+##### Aug 9th, 2021
+
+The coffee can be basically categorized into three types according to the roast: light, medium and dark. Generally speaking, light roast coffee is more sour than dark roast coffee, while the latter one is more bitter.
+
+Starbucks Veranda Blend is Blonde roasted (light roasted) Arabica coffee. It tastes acidic, not bitter, not sweet for me.
+
+---
+
+Continuing...
+
