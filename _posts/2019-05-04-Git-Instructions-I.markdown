@@ -10,6 +10,14 @@ author: ykx
 description: Some Git instructions I've used.
 ---
 
+> Ref:
+> [删除远程分支](https://www.cnblogs.com/luosongchao/p/3408365.html)，
+> [新建分支与合并](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6)，
+> [分支管理](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E7%AE%A1%E7%90%86)，
+> [**fork的仓库与原仓库保持同步**](https://blog.csdn.net/starter_____/article/details/79321962)，
+> [远程仓库的使用](https://git-scm.com/book/zh/v1/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)
+
+
 ### 分支相关操作
 
 * 显示分支：
@@ -88,10 +96,3 @@ git pull upstream master
 git push/pull origin/upstream/... [branch-name]
 ~~~
 
-> ref:
->
-> [删除远程分支](https://www.cnblogs.com/luosongchao/p/3408365.html)，
-> [新建分支与合并](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E6%96%B0%E5%BB%BA%E4%B8%8E%E5%90%88%E5%B9%B6)，
-> [分支管理](https://git-scm.com/book/zh/v1/Git-%E5%88%86%E6%94%AF-%E5%88%86%E6%94%AF%E7%9A%84%E7%AE%A1%E7%90%86)，
-> [**fork的仓库与原仓库保持同步**](https://blog.csdn.net/starter_____/article/details/79321962)，
-> [远程仓库的使用](https://git-scm.com/book/zh/v1/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)

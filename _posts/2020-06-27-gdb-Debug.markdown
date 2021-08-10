@@ -56,7 +56,7 @@ description: GDB debug tool used in Linux. PDB added (10/04/2020).
 
 # PDB
 
-> ref:
+> Ref:
 > [pdb - The Python Debugger](https://docs.python.org/3.2/library/pdb.html)
 
 ### Start PDB

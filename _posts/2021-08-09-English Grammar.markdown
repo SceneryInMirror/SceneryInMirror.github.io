@@ -12,7 +12,9 @@ description: To better learn written English, I wrote down some small but import
 
 ### When to use Capital Letters in Title
 
-###### ref: [Capitalization in Titles - Grammarly](https://www.grammarly.com/blog/capitalization-in-the-titles/?&utm_source=google&utm_medium=cpc&utm_campaign=10273012991&utm_targetid=dsa-1233402314764&gclid=CjwKCAjwpMOIBhBAEiwAy5M6YAgDAKY2CWcaxC3umBKCIhF9UHHhEohvgsTL3YB1h8PxeytjaSu2vRoCABAQAvD_BwE&gclsrc=aw.ds), [Capitalize My Title](https://capitalizemytitle.com/)
+> Ref: 
+> [Capitalization in Titles - Grammarly](https://www.grammarly.com/blog/capitalization-in-the-titles/?&utm_source=google&utm_medium=cpc&utm_campaign=10273012991&utm_targetid=dsa-1233402314764&gclid=CjwKCAjwpMOIBhBAEiwAy5M6YAgDAKY2CWcaxC3umBKCIhF9UHHhEohvgsTL3YB1h8PxeytjaSu2vRoCABAQAvD_BwE&gclsrc=aw.ds), 
+> [Capitalize My Title](https://capitalizemytitle.com/)
 
 1. Usually, capitalize the nouns, pronouns, verbs, adjectives, and adverbs, and don't capitalize the prepositions, articles and conjunctions unless they're the first or last word.
 
@@ -24,7 +26,8 @@ description: To better learn written English, I wrote down some small but import
 
 ### Comma Before 'And'
 
-###### ref: [Comma Before And - Grammarly](https://www.grammarly.com/blog/comma-before-and/?&utm_source=google&utm_medium=cpc&utm_campaign=10273012991&utm_targetid=dsa-1233402314764&gclid=CjwKCAjwpMOIBhBAEiwAy5M6YJ0OqN1kmvPZVqP_2msErUhIsGdo-7rpXrPGRrcLmLF53x5H3K66KRoC528QAvD_BwE&gclsrc=aw.ds)
+> Ref: 
+> [Comma Before And - Grammarly](https://www.grammarly.com/blog/comma-before-and/?&utm_source=google&utm_medium=cpc&utm_campaign=10273012991&utm_targetid=dsa-1233402314764&gclid=CjwKCAjwpMOIBhBAEiwAy5M6YJ0OqN1kmvPZVqP_2msErUhIsGdo-7rpXrPGRrcLmLF53x5H3K66KRoC528QAvD_BwE&gclsrc=aw.ds)
 
 1. The comma is optional when using it in a list of three or more items.
 
