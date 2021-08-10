@@ -29,6 +29,7 @@ description: To better learn written English, I wrote down some small but import
 1. The comma is optional when using it in a list of three or more items.
 
 > The dog is young, well trained, and good natured.
+> 
 > The dog is young, well trained and good natured.
 
 2. The comma should not be used when only two items are mentioned.
@@ -38,4 +39,5 @@ description: To better learn written English, I wrote down some small but import
 3. The comma is needed to join two independent clauses unless the two independent clauses are very short and closely connected.
 
 > On Monday we'll see the Eiffel Tower, and on Tuesday we'll visit the Louvre.
+> 
 > Arthur cooked and Melvin cleaned.

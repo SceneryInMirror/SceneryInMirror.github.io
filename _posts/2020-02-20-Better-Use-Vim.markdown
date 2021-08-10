@@ -35,14 +35,18 @@ description: These commands and shortcuts may help use Vim more efficiently.
 
 ## Multi-line Operations
 
-### Insert
+### Block Insert
 
 1. Ctrl+v: select multiple lines 
+
 2. I (capital i): insert mode
+
 3. insert the words
+
 4. Esc: after several seconds, the words are inserted to all selected lines
 
-### Delete
+### Block Delete
 
 1. Ctrl+v: select contents in multiple lines (with j, i, k and l)
+
 2. d: delete the selected contents
