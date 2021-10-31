@@ -1,5 +1,5 @@
 ---
-title: "Preparation for International Teaching Assistant (ITA) Exam"
+title: "International Teaching Assistant (ITA) Exam"
 layout: post
 date: 2021-08-11 21:00
 img: usc.png
@@ -7,7 +7,7 @@ headerImage: True
 tag: [Learning]
 category: blog
 author: ykx
-description: I will apply for the TA of EE-477 in 2021 Fall. Here is the important information about the ITA exam.
+description: I am one of the teaching assistants for USC EE-477L (21Fall). As an international student, I am required to pass the ITA exam before becoming TA. I would like to share my experience with you and hope it may help you better prepare for the exam.
 ---
 
 ## International Teaching Assistant (ITA) Exam
@@ -39,6 +39,8 @@ In addition to providing a **definition** and **explaining the importance of you
 
 #### [ITA Terms (Electrical Engineering)](http://ali.usc.edu/wp-content/uploads/Electrical-Engineering.pdf)
 
+There are about 100 topics for Electrical Engineering. I am more familiar with the topics related to circuits, communication and networks than the topics related to physics.
+
 * Familiar (49): Adder Design, Ripple Carry Adder vs. Carry Look-Ahead Adder; AM (amplitude modulation); AND gate; bandwidth; bit rate; Boolean expression; capacitance; Circuit analysis; CMOS (Complementary Metal Oxide Semiconductor) logic; continuous time system; current source; determinant of a matrix; discrete time system; DRAM (Dynamic Random Access Memory); encoder; Flash Memory; flip-flop; FM (frequency modulation); FOR-loop, WHILE-loop, recursive function call; full-adder; Half-Adder, Full-Adder, Ripple-Carry Adder; Karnaugh map; Kirchhoff's current law; Kirchhoff's voltage law; Laplace transform; Latches, Flip-Flops, Counters; linear circuit; Linear equivalence circuit; Logic gate; matrix; Multiplexer; NOT function; Observability; Ohm's law; OR gate; Phasor diagram; probability density; random variable; random-access memory; resistance; ROM (Read Only Memory), RAM (Random Access Memory); Semiconductor; sensor; signal generator; signal-to-noise ratio; Synchronous systems -- Clock and Clock Skew; Timing analysis of a digital circuit; Transmission gate in VLSI; voltage source
 
 * Known (14): Ampere's law; diffusion current; error probability; feedback control system; filters (low-pass, band-pass, ...); Fourier series; Fourier transforms; frequency response; Impulse of response; impulse response; inductance; modulation and demodulation; packet; step response
@@ -46,5 +48,12 @@ In addition to providing a **definition** and **explaining the importance of you
 
 * Unknown (15): accelerometer; actuator; asynchronous detection; closed-loop control; compiler; content-addressable memory; diode detector; Magnetism; open-loop control; Output-rate control; Permeability; recursive filter; root-locus; Rotating field; Tachometer generator
 
+## During the Exam
 
+Two examiners attended the exam. One of them had a brief chat with me about my experience and research, and another one asked several questions during my presentation about bit rate.
 
+Your speaking should be clear, fluent, and with good intonation. Compared with the technical content, they are more concerned with how you deliver the content and how you handle with the questions. Also, they expect to see your passion and confidence.
+
+## After the Exam
+
+I got 5.5 out of 7 and I am required to take one language course from ALI. It is a good experience and I have already learned a lot from Lucienne.
