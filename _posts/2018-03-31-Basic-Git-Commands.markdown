@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Git Repository Instructions"
+title: "Basic Git Commands"
 img: git.jpg
 date: 2018-03-31 12:49:00
 category: blog
 author: yxk
-description: To remember the basic instructions used in git, I wrote this blog.
+description: The basic git commands commonly used.
 tag: [Git, Computer, Learning]
 ---
 

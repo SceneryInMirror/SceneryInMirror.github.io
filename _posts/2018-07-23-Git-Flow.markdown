@@ -199,7 +199,7 @@ git clone支持多种协议：HTTP(s),SSH,Git,本地文件协议等
 
 为了便于管理，Git要求每个远程主机都必须指定一个主机名，`git remote`命令就用于管理主机名：
 
-   ~~~Bash
+~~~Bash
 git remote # 列出所有远程主机
 git remote -v # 参看远程主机的网址
 # 克隆版本库时，所使用的远程主机自动被Git命名为`origin`，可以用参数`-o`指定克隆时的远程主机名
@@ -209,47 +209,47 @@ git remote show <主机名> # 查看该主机的详细信息
 git remote add <主机名> <网址> # 添加远程主机
 git remote rm <主机名> # 删除远程主机
 git remote rename <原主机名> <新主机名> # 远程主机的改名
-   ~~~
+~~~
 
 #### 2.3 git fetch
 
 1. 一旦远程主机的版本库有了更新(commit)，需要将这些更新取回本地：
 
-   ~~~Bash
+~~~Bash
 git fetch <远程主机名> # 将某个远程主机的更新全部取回本地
 git fetch # 通常用来查看他人的进程，取回的代码对本地的开发代码没有影响
 git fetch <远程主机名> <分支名> # 取回特定分支的更新
-   ~~~
+~~~
 
 2. 所取回的更新，在本地主机上要用“远程主机名/分支名”的形式读取。比如`origin`主机的`master`，就要用`origin/master`读取。
 
-   ~~~Bash
+~~~Bash
 git branch -r # 查看远程分支
 git branch -a # 查看所有分支
-   ~~~
+~~~
 
 3. 取回远程主机的更新后，可以在它的基础上，使用`git checkout`命令创建一个新的分支。
 
-   ~~~Bash
+~~~Bash
 # 在`origin/master`的基础上创建一个新分支
 git checkout -b newBranch origin/master
-   ~~~
+~~~
 
 4. 也可以使用`git merge`命令或者`git rebase`命令，在本地分支上合并远程分支
 
-   ~~~Bash
+~~~Bash
 git merge origin/master
 git rebase origin/master
-   ~~~
+~~~
 
 #### 2.4 git pull
 
 1. git pull命令的作用是，取回远程主机某个分支的更新，再与本地的指定分支合并。
 
-   ~~~Bash
+~~~Bash
 git pull <远程主机名> <远程分支名>:<本地分支名>
 
-# 取回`origin`主机的`next`分支，与本地的`master`分支合并
+#取回`origin`主机的`next`分支，与本地的`master`分支合并
 git pull origin next:master
 
 # 远程分支和当前分支合并，可省略冒号后面的部分
@@ -258,11 +258,11 @@ git pull origin next
 # 等同于先git fetch，再git merge
 git fetch origin
 git merge origin/next
-   ~~~
+~~~
 
 2. 在某些场合，Git会自动在本地分支与远程分支之间建立一种追踪关系(tracking)。比如，在`git clone`的时候，所有本地分支默认与远程主机的同名分支建立追踪关系，即本地的`master`分支自动追踪`origin/master`分支。
 
-   ~~~Bash
+~~~Bash
 # 手动建立追踪关系
 git branch --set-upstream master origin/next
 
@@ -271,28 +271,29 @@ git pull origin # 表示本地的当前分支自动与对应的`origin`主机“
 
 # 如果当前分支只有一个追踪分支，连远程主机名都可以省略
 git pull # 当前分支自动与唯一一个追踪分支进行合并
-   ~~~
+~~~
 
 3. 如果合并需要采用rebase模式，可以使用`--rebase`选项
 
-   ~~~Bash
+~~~Bash
 git pull --rebase <远程主机名> <远程分支名>:<本地分支名>
-   ~~~
+~~~
 
 4. 如果远程主机删除了某个分支，默认情况下，`git pull`不会在拉取远程分支的时候，删除对应的本地分支。这是为了防止，由于其他人操作了远程主机，导致`git pull`不知不觉删除了本地分支。但是加上参数`-p`就会在本地删除远程已经删除的分支。
 
-   ~~~Bash
+~~~Bash
 git pull -p
+
 # 等同于下面的命令
 git fetch --prune origin
 git fetch -p
-   ~~~
+~~~
 
 #### 2.5 git push
 
 1. `git push`命令用于将本地分支的更新，推送到远程主机。它的格式与`git pull`命令相仿。
 
-   ~~~Bash
+~~~Bash
 git push <远程主机名> <本地分支名>:<远程分支名>
 
 # 如果省略远程分支名，则表示将本地分支推送与之存在“追踪关系”的远程分支（通常两者同名），如果该远程分支不存在，则会被新建
@@ -310,32 +311,32 @@ git push
 
 # 如果当前分支与多个主机存在追踪关系，则可以使用`-u`选项指定一个默认主机，这样后面就可以不加任何参数使用`git push`
 git push -u origin master # 将本地的`master`推送到`origin`主机，同时指定`origin`为默认主机
-   ~~~
+~~~
 
 2. 不带任何参数的`git push`，默认只推送当前分支，这叫做simple方式。此外还有一种matching方式，会推送所有有对应的远程分支的本地分支。如果要修改这个设置，可以采用`git config`命令
 
-   ~~~Bash
+~~~Bash
 git config --global push.default matching
 git config --global push.default simple
-   ~~~
+~~~
 
 3. 还有一种情况，就是不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机，这时需要使用`--all`选项
 
-   ~~~Bash
+~~~Bash
 git push --all origin # 将所有本地分支都推送到origin主机
-   ~~~
+~~~
 
 4. 如果远程主机的版本比本地版本更新，推送时Git会报错，要求先在本地做`git pull`合并差异，然后再推送到远程主机。`--force`选项可以强制推送，导致远程主机上更新的版本被覆盖
 
-   ~~~Bash
+~~~Bash
 git push --force origin
-   ~~~
+~~~
 
 5. `git push`不会推送标签(tag)，除非使用`--tags`选项
 
-   ~~~Bash
+~~~Bash
 git push origin --tags
-   ~~~
+~~~
 
 ### 3 Git分支管理策略
 
