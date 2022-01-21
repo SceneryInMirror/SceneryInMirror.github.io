@@ -56,4 +56,6 @@ Your speaking should be clear, fluent, and with good intonation. Compared with t
 
 ## After the Exam
 
-I got 5.5 out of 7 and I am required to take one language course from ALI. It is a good experience and I have already learned a lot from Lucienne.
+I got 5.5 out of 7 and I am required to take one language course from ALI. It is a good experience and I have already learned a lot from Lucienne. 
+
+At the end of the semester, I took the ITA exam again and passed with a score of 6.

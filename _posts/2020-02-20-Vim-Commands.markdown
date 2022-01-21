@@ -1,5 +1,5 @@
 ---
-title: "Vim"
+title: "Vim Commands"
 layout: post
 date: 2020-02-20 16:00
 img: vim.jpg
