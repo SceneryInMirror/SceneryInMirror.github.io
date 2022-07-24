@@ -1,0 +1,10 @@
+---
+title: Links
+layout: page
+---
+
+Links to my friends' blogs:
+{% for friend in site.friends %}
+<a href="{{friend.href}}">{{friend.title}}</a>
+{% endfor %}
+

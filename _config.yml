@@ -1,6 +1,7 @@
 # basic configuration
-name: Kaixin Yang
-bio: Third Year Ph.D. Student in DesCyPhy Lab at USC
+name: Kaixin (Cayson) Yang
+bio: Third Year Ph.D. Student in DesCyPhy Lab at USC 
+#bio: kaixinya AT usc.edu
 description: Kaixin's Garden
 url: "https://sceneryinmirror.github.io"
 baseurl: ""
@@ -39,9 +40,9 @@ disqus:
 
 # if you don't have any of social below, comment the line
 #facebook: profile.php?id=100012146822426
-#twitter: Kaixin_Yang_LA
+twitter: Kaixin_Yang_LA
 # google: mygoogle
-instagram: cashinyang
+instagram: kaixinyang97
 # pinterest: mypinterest
 linkedin: kaixin-yang-a27287162
 # youtube: myyoutube
@@ -65,8 +66,8 @@ email: kaixinya@usc.edu
 
 authors:
     ykx:
-        name: Kaixin Yang
-        bio: Keep on going.
+        name: Kaixin (Cayson) Yang
+        bio: 做你该做的事情，并接受它的事与愿违
         external-image: false
         picture: assets/images/profile.jpg
 
@@ -84,12 +85,14 @@ paginate_path: "blog/:num/"
 #projects: true
 
 # if you don't need "about" or "blog", comment them out below
-#about: true
-blog: true
-#projects: true
+about: false
+blog: false
+projects: false
 tags-page: true
 tags: true
 research: true
+links: true
+gallery: true
 
 # do you want to show the "read time" of the posts?
 read-time: true

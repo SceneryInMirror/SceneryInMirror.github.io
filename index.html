@@ -1,19 +1,47 @@
 ---
-layout: page
+layout: default
 title: Home
 ---
 
-<br/>
-<p>
-Hi, welcome to my blog! I am 杨凯欣 (Kaixin Yang, pronounced as /kæ'ʃɪn jʌŋ/), a third year Ph.D. student in <a href="https://descyphy.usc.edu/">DesCyPhy Lab</a> at USC, advised by <a href="https://viterbi.usc.edu/directory/faculty/Nuzzo/Pierluigi">Prof. Pierluigi Nuzzo</a>.
-</p>
+<table>
+<tbody>
+<tr>
+<td>
+{% include header.html %}
+</td>
 
+<td>
 <p>
-And also welcome to my friends' blogs: 
-{% for friend in site.friends %}
-<a href="{{friend.href}}">{{friend.title}}</a> 
-{% endfor %}
+I am Kaixin (Cayson) Yang (Chinese name: 杨凯欣), a third year Ph.D. student in <a href="https://descyphy.usc.edu/">DesCyPhy Lab</a> at University of Southern California (USC), advised by <a href="https://viterbi.usc.edu/directory/faculty/Nuzzo/Pierluigi">Prof. Pierluigi Nuzzo</a>. I am interested in hardware security and trustworthy hardware design. Recently, I focus on logic locking for gate-level VLSI design, Satisfiability (SAT) based attacks and Machine Learning (ML) based attacks on encrypted design, and metrics for evaluating and guiding trustworthy design.
+
+
+<!--Welcome to my blog! I am 杨凯欣 (Kaixin Yang, pronounced as /kæ'ʃɪn jʌŋ/, and please feel free to call me Cayson), a third year Ph.D. student in <a href="https://descyphy.usc.edu/">DesCyPhy Lab</a> at USC, advised by <a href="https://viterbi.usc.edu/directory/faculty/Nuzzo/Pierluigi">Prof. Pierluigi Nuzzo</a>. -->
+
 </p>
+</td>
+</tbody>
+</table>
+
+
+<h3 style="text-align:left">EXPERIENCE</h3>
+
+<p>Aug. 2020 - Present, Research Assistant, USC</p>
+<p>Jun. 2022 - Jul. 2022, <a href="https://viterbik12.usc.edu/shine/">SHINE</a> mentor, USC</p>
+<p>Jan. 2022 - May 2022, Teaching Assistant, EE577a, USC</p>
+<p>Aug. 2021 - Dec. 2021, Teaching Assistant, EE477L, USC</p>
+
+<h3 style="text-align:left">EDUCATION</h3>
+
+<p>2019 - Present, Ph.D. student, Computer Engineering, USC</p>
+<p>2021, Master's Degree, Electrical Engineering, USC</p>
+<p>2019, Bachelor's Degree, Electronic and Information Science and Technology, Peking University</p>
+
+<h3 style="text-align:left">NEWS</h3>
+
+<p>[Apr. 2022][Award] I have been selected to participate in the Young Fellows program promoted by the Design Automation Conference (DAC).</p>
+
+{% include footer.html %}
+
 
 <!--
 <div class="
