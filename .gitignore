@@ -5,3 +5,5 @@ Gemfile.lock
 _config-dev.yml
 travis.sh
 robots.txt
+token
+.token
