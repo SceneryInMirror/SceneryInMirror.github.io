@@ -11,3 +11,9 @@ group :jekyll_plugins do
 end
 
 
+
+gem "webrick", "~> 1.7" 
+
+# ruby 3.0 no longer comes with webrick
+# to fix this issue, run "bundle add webrick"
+# and then "bundle exec jekyll serve"
