@@ -86,7 +86,7 @@ paginate_path: "blog/:num/"
 
 # if you don't need "about" or "blog", comment them out below
 about: false
-blog: false
+blog: true
 projects: false
 tags-page: true
 tags: true
