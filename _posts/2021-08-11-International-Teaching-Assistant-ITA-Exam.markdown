@@ -19,23 +19,23 @@ description: I am one of the teaching assistants for USC EE-477L (21Fall). As an
 
 #### Interview Contents
 
-1. A brief interview in which you talk about your educational experience and interest in graduate studies at USC. (3-5 minutes)
-2. An explanation of a term or concept (approximately 7 minutes). Two terms or concepts will be sent to you 24 hours prior to the exam so that you can prepare a simulated classroom presentation on one of those terms or concepts.
-3. Option to choose ONE of the following tools in your presentation:
-   1. a maximum of 2 power point slides
-   2. a physical blackboard or a white board
-   3. a smart board or Zoom whiteboard
-4. The examiners will act as students and will ask questions about the term.
+* A brief interview in which you talk about your educational experience and interest in graduate studies at USC. (3-5 minutes)
+* An explanation of a term or concept (approximately 7 minutes). Two terms or concepts will be sent to you 24 hours prior to the exam so that you can prepare a simulated classroom presentation on one of those terms or concepts.
+* Option to choose ONE of the following tools in your presentation:
+   * a maximum of 2 power point slides
+   * a physical blackboard or a white board
+   * a smart board or Zoom whiteboard
+* The examiners will act as students and will ask questions about the term.
 
 #### Presentation Contents
 
 In addition to providing a **definition** and **explaining the importance of your term**, it is recommended that your presentation include one or more of the following: 
 
-1. Examples (practical and/or personal)
-2. Analogies (e.g. "The structure of an atom is similar to that of the solar system.")
-3. Comparisons and/or contrasts
-4. Word origin (meanings of prefix, suffix, root)
-5. Drawings or diagrams
+* Examples (practical and/or personal)
+* Analogies (e.g. "The structure of an atom is similar to that of the solar system.")
+* Comparisons and/or contrasts
+* Word origin (meanings of prefix, suffix, root)
+* Drawings or diagrams
 
 #### [ITA Terms (Electrical Engineering)](http://ali.usc.edu/wp-content/uploads/Electrical-Engineering.pdf)
 
