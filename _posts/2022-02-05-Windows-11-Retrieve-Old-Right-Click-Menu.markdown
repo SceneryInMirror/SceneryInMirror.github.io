@@ -2,7 +2,7 @@
 title: "Windows 11 Retrieve Old Right-Click Menu"
 layout: post
 date: 2022-02-05 16:00
-img: usc.png
+img: windows11.jpg
 headerImage: True
 tag: [Learning]
 category: blog
