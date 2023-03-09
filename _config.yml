@@ -1,5 +1,5 @@
 # basic configuration
-name: Kaixin (Cayson) Yang
+name: Kaixin Yang
 bio: Ph.D. Student in DesCyPhy Lab at USC 
 #bio: kaixinya AT usc.edu
 description: Kaixin's Garden
@@ -66,7 +66,7 @@ email: kaixinya@usc.edu
 
 authors:
     ykx:
-        name: Kaixin (Cayson) Yang
+        name: Kaixin Yang
         bio: 做你该做的事情，并接受它的事与愿违
         external-image: false
         picture: assets/images/profile.jpg
