@@ -7,7 +7,7 @@ headerImage: True
 tag: [Linux, Learning]
 category: blog
 author: ykx
-description: GDB debug tool used in Linux. PDB added (10/04/2020).
+description: A brief tutorial to GDB, a debug tool for C/C++. PDB, a similar debug tool for Python, was added on 10/04/2020.
 ---
 
 # GDB
@@ -19,9 +19,9 @@ description: GDB debug tool used in Linux. PDB added (10/04/2020).
 
 ### Start GDB
 
-1. When compiling, add '-g' option: g++ -g hello.cpp -o hello
+1. Enable the debug mode by adding the '-g' configuration when compiling: g++ -g hello.cpp -o hello
 
-2. gdb hello
+2. Start the debug mode using the 'gdb' command: gdb hello
 
 ### Arguments
 
@@ -61,7 +61,7 @@ description: GDB debug tool used in Linux. PDB added (10/04/2020).
 
 ### Start PDB
 
-python -m pdb demo.py
+1. Enable the debug mode by adding the '-m pdb' configuration: python -m pdb demo.py
 
 ### Commands
 

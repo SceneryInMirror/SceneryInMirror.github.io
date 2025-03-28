@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Vim Configuration"
+title: "Personal Vim Configuration"
 img: vim.jpg
 date: 2018-04-02 10:26:00
 category: blog
@@ -131,12 +131,6 @@ set t_Co=256
 
 * :noh
 
-### su修改密码
-
-* 设置root密码：sudo passwd root
-
-* su和sudo的区别：su的密码是root的密码，sudo的密码是用户的密码；su直接将身份变成root，sudo是以用户身份登录以后以root的身份运行命令，不需要知道root密码
-
 ### Vim跨文本复制粘贴
 
 * 在普通模式下输入:sp横向切分一个窗口，或者:vsp纵向切分一个窗口
@@ -144,6 +138,10 @@ set t_Co=256
 * 在普通模式下输入:e [filename]，在其中一个窗口打开另一个文件
 
 * 两个窗口切换：普通模式下ctrl+w，再按一下w就可以切换
+
+* 切换至源文件窗口，使用yy复制若干行
+
+* 切换至目标文件窗口，使用p粘贴
 
 ### 同一窗口打开多个Terminal
 

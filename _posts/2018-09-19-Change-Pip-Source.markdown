@@ -13,11 +13,13 @@ tag: [Computer, Python, Linux]
 
 ## Temporary Way
 
-eg: pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple
+~~~bash
+pip install scrapy -i https://pypi.tuna.tsinghua.edu.cn/simple
+~~~
 
 ## Long-term Way
 
-modify '~/.pip/pip.conf':
+- modify '~/.pip/pip.conf':
 
 ~~~bash
 [global]
