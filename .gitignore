@@ -7,3 +7,4 @@ travis.sh
 robots.txt
 token
 .token
+.sass-cache/*
