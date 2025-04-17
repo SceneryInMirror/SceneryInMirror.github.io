@@ -2,7 +2,7 @@
 .blog,
 .tags,
 .projects
-    margin-top: 125px
+    margin-top: 15rem
 
     > .list
         border-top: 1px solid $epsilon
@@ -24,6 +24,9 @@
             box-shadow: #FFF 0 0 0 5px
             border-radius: 3px
 
+.blog > .list > .item
+    min-height: 12rem;
+
 .home > .list,
 .blog > .list,
 .tags > .list,
@@ -41,7 +44,6 @@
     > .item > .url > .title
         margin: 0
         width: 75%
-        font-weight: 500
         transition: all ease-in-out .2s
 
     > .item:hover > .url > .title
@@ -75,12 +77,11 @@
         margin-right: 10px
 
     > .post-title-image
-        //max-height: 120px
         display: block
         float: left
-        max-height: 10rem
+        max-height: 9rem
         width: auto
-        margin: 0 10px
+        margin: 0 2rem
         position: relative
         bottom: 0.5rem
         max-width: 75%
