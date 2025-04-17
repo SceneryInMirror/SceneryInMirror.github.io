@@ -1,5 +1,5 @@
 # basic configuration
-name: Kaixin Yang
+name: KAIXIN YANG
 bio: Ph.D. Candidate in the DesCyPhy Lab at USC 
 #bio: kaixinya AT usc.edu
 description: Kaixin's Garden
@@ -78,7 +78,7 @@ width: large
 
 
 # if you don't need pagination, comment the *paginate* configs below
-paginate: 10
+paginate: 5
 paginate_path: "blog/:num/"
 
 # if you don't need projects, comment the *projects* configs below
